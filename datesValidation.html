@@ -1,0 +1,41 @@
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>jQuery UI Datepicker - Default functionality</title>
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
+		<script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+		<script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
+		<link rel="stylesheet" href="/resources/demos/style.css" />
+	</head>
+	<body>
+		<script type="text/javascript" > 
+							alert("OK");
+					$(document).ready(function () {
+						$("#txt1").datepicker();
+						$("#datepicker").datepicker();
+						$("#txt1").change(function () {
+							datesValidation("txt1", "datepicker");
+						});
+					});
+
+					function datesValidation(ctrl1, ctrl2) {
+						//alert('ok');
+						test = $("#" + ctrl1).datepicker('getDate');
+						testm = new Date(test.getTime());
+						testm.setDate(testm.getDate() + 1);
+						alert(testm);
+						
+						$("#" + ctrl2).datepicker("option", {
+							minDate : null,
+							maxDate : null
+						});
+						
+						$("#" + ctrl2).datepicker("option", "minDate", testm);
+						$("#" + ctrl2).val("");
+					}
+								
+		</script>
+		<input type="text" id="txt1" /></br>
+		<input type="text" id="datepicker" />
+	</body>
+</html>

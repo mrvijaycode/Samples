@@ -1,0 +1,838 @@
+<ZoneTemplate>
+						<WebPartPages:DataFormWebPart runat="server" ShowWithSampleData="true" AllowRemove="False" AllowHide="False" SuppressWebPartChrome="False" PartImageLarge="/_layouts/images/itdl.gif" ViewContentTypeId="0x" TitleUrl="/sites/genomics/Milestone_Documents/Forms/AllItems.aspx" ExportMode="All" Dir="Default" MissingAssembly="Cannot import this Web Part." AllowClose="False" ID="g_06373352_c6b3_4f73_9af2_a9ebf927797e" IsIncludedFilter="" DetailLink="/sites/genomics/Milestone_Documents/Forms/AllItems.aspx" AllowEdit="False" UseSQLDataSourcePaging="True" HelpMode="Modeless" IsIncluded="True" Description="Milestone documents" NoDefaultStyle="TRUE" FrameState="Normal" AllowConnect="False" ViewFlag="9" AllowZoneChange="False" AllowMinimize="False" Title="Milestone_Documents" PartOrder="1" PageSize="20" ListName="{FF5560B5-40E9-4B88-92FF-2BEB08ED4E65}" FrameType="None" CatalogIconImageUrl="/_layouts/images/itdl.gif" HelpLink="" PartImageSmall="" ConnectionID="00000000-0000-0000-0000-000000000000" ExportControlledProperties="True" ChromeType="None" IsVisible="True" __MarkupType="vsattributemarkup" __WebPartId="{06373352-C6B3-4F73-9AF2-A9EBF927797E}" __AllowXSLTEditing="true" WebPart="true" Height="" Width=""><ParameterBindings>
+							<ParameterBinding Name="PageUrl" Location="Postback;Connection;CAMLVariable"/>
+							<ParameterBinding Name="PagePath" Location="Postback;Connection;CAMLVariable"/>
+							<ParameterBinding Name="HttpHost" Location="Postback;Connection;CAMLVariable"/>
+							<ParameterBinding Name="HttpPath" Location="Postback;Connection;CAMLVariable"/>
+							<ParameterBinding Name="List" Location="Postback;Connection;CAMLVariable"/>
+							<ParameterBinding Name="URL_Display" Location="Postback;Connection;CAMLVariable"/>
+							<ParameterBinding Name="HttpVDir" Location="Postback;Connection;CAMLVariable"/>
+							<ParameterBinding Name="View" Location="Postback;Connection;CAMLVariable"/>
+							<ParameterBinding Name="FilterLink" Location="Postback;Connection;CAMLVariable"/>
+							<ParameterBinding Name="Language" Location="Postback;Connection;CAMLVariable"/>
+							<ParameterBinding Name="dvt_adhocmode" Location="Postback;Connection;CAMLVariable"/>
+							<ParameterBinding Name="dvt_fieldsort" Location="Postback;Connection;CAMLVariable"/>
+							<ParameterBinding Name="dvt_sortfield" Location="Postback;Connection;CAMLVariable"/>
+							<ParameterBinding Name="dvt_sortdir" Location="Postback;Connection;CAMLVariable"/>
+							<ParameterBinding Name="dvt_filterfield" Location="Postback;Connection;CAMLVariable"/>
+							<ParameterBinding Name="dvt_firstrow" Location="Postback;Connection;CAMLVariable"/>
+							<ParameterBinding Name="dvt_p2plinkfields" Location="Postback;Connection;CAMLVariable"/>
+							<ParameterBinding Name="dvt_nextpagedata" Location="Postback;Connection;CAMLVariable"/>
+							<ParameterBinding Name="dvt_sorttype" Location="Postback;Connection;CAMLVariable"/>
+							<ParameterBinding Name="dvt_apos" Location="Postback;Connection;CAMLVariable"/>
+							<ParameterBinding Name="filterParam" Location="Postback;Connection"/>
+							<ParameterBinding Name="ImagesPath" Location="Postback;Connection;CAMLVariable"/>
+							<ParameterBinding Name="ListUrlDir" Location="Postback;Connection;CAMLVariable"/>
+							<ParameterBinding Name="EMail" Location="Postback;Connection;CAMLVariable"/>
+							<ParameterBinding Name="Userid" Location="Postback;Connection;CAMLVariable"/>
+							<ParameterBinding Name="URL_DISPLAY" Location="Postback;Connection;CAMLVariable"/>
+							<ParameterBinding Name="URL_EDIT" Location="Postback;Connection;CAMLVariable"/>
+							<ParameterBinding Name="URL_Edit" Location="Postback;Connection;CAMLVariable"/>
+							<ParameterBinding Name="URL_Lookup" Location="Postback;Connection;CAMLVariable"/>
+							<ParameterBinding Name="UserID" Location="CAMLVariable" DefaultValue="CurrentUserName"/>
+							<ParameterBinding Name="Today" Location="CAMLVariable" DefaultValue="CurrentDate"/>
+							<ParameterBinding Name="dvt_filterfields" Location="Postback;Connection"/>
+							<ParameterBinding Name="dvt_partguid" Location="Postback;Connection"/>
+							<ParameterBinding Name="ListID" Location="None" DefaultValue="{FF5560B5-40E9-4B88-92FF-2BEB08ED4E65}"/>
+							<ParameterBinding Name="RootFolder" Location="QueryString(RootFolder)" DefaultValue=""/>
+							<ParameterBinding Name="study" Location="QueryString(itmid)" DefaultValue=""/>
+							<ParameterBinding Name="dvt_startposition" Location="Postback" DefaultValue=""/>
+							<ParameterBinding Name="StartRowIndex" Location="None" DefaultValue="0"/>
+							<ParameterBinding Name="nextpagedata" Location="None" DefaultValue="0"/>
+							<ParameterBinding Name="MaximumRows" Location="None" DefaultValue="20"/>
+						</ParameterBindings>
+<DataFields>@FileLeafRef,Name (for use in forms);@Title,GSSID;@StudyName,StudyName;@Flag,Flag;@BU,BU;@GC,GC;@Stats,Stats;@BioInformatics,BioInformatics;@URL,URL;@ContentType,Content Type;@StudyID,StudyID;@ID,ID;@Created,Created;@Author,Created By;@Modified,Modified;@Editor,Modified By;@_CopySource,Copy Source;@CheckoutUser,Checked Out To;@_CheckinComment,Check In Comment;@CheckedOutTitle,Checked Out To;@CheckedOutUserId,ID of the User who has the item Checked Out;@FileDirRef,Path;@FSObjType,Item Type;@HTML_x0020_File_x0020_Type,HTML File Type;@File_x0020_Type,File Type;@IsCheckedoutToLocal,Is Checked out to local;@_SourceUrl,Source Url;@_HasCopyDestinations,Has Copy Destinations;@ContentTypeId,Content Type ID;@_ModerationStatus,Approval Status;@_UIVersion,UI Version;@Created_x0020_Date,Created;@FileRef,URL Path;@File_x0020_Size,File Size;@_UIVersionString,Version;@ParentVersionString,Source Version (Converted Document);@ParentLeafName,Source Name (Converted Document);@TemplateUrl,Template Link;</DataFields>
+<DataSources>
+<SharePoint:SPDataSource runat="server" DataSourceMode="List" SelectCommand="&lt;View&gt;&lt;Query&gt;&lt;OrderBy&gt;&lt;FieldRef Name=&quot;FileLeafRef&quot;/&gt;&lt;/OrderBy&gt;&lt;Where&gt;&lt;And&gt;&lt;Eq&gt;&lt;FieldRef Name=&quot;StudyID&quot;/&gt;&lt;Value Type=&quot;Text&quot;&gt;{study}&lt;/Value&gt;&lt;/Eq&gt;&lt;Eq&gt;&lt;FieldRef Name=&quot;Flag&quot;/&gt;&lt;Value Type=&quot;Text&quot;&gt;1&lt;/Value&gt;&lt;/Eq&gt;&lt;/And&gt;&lt;/Where&gt;&lt;/Query&gt;&lt;ViewFields&gt;&lt;FieldRef Name=&quot;ContentTypeId&quot;/&gt;&lt;FieldRef Name=&quot;FileLeafRef&quot;/&gt;&lt;FieldRef Name=&quot;File_x0020_Type&quot;/&gt;&lt;FieldRef Name=&quot;HTML_x0020_File_x0020_Type&quot;/&gt;&lt;FieldRef Name=&quot;_SourceUrl&quot;/&gt;&lt;FieldRef Name=&quot;Title&quot;/&gt;&lt;FieldRef Name=&quot;TemplateUrl&quot;/&gt;&lt;FieldRef Name=&quot;StudyName&quot;/&gt;&lt;FieldRef Name=&quot;Flag&quot;/&gt;&lt;FieldRef Name=&quot;BU&quot;/&gt;&lt;FieldRef Name=&quot;GC&quot;/&gt;&lt;FieldRef Name=&quot;Stats&quot;/&gt;&lt;FieldRef Name=&quot;BioInformatics&quot;/&gt;&lt;FieldRef Name=&quot;URL&quot;/&gt;&lt;FieldRef Name=&quot;ContentType&quot;/&gt;&lt;FieldRef Name=&quot;StudyID&quot;/&gt;&lt;FieldRef Name=&quot;ID&quot;/&gt;&lt;FieldRef Name=&quot;Created&quot;/&gt;&lt;FieldRef Name=&quot;Author&quot;/&gt;&lt;FieldRef Name=&quot;Modified&quot;/&gt;&lt;FieldRef Name=&quot;Editor&quot;/&gt;&lt;FieldRef Name=&quot;_HasCopyDestinations&quot;/&gt;&lt;FieldRef Name=&quot;_CopySource&quot;/&gt;&lt;FieldRef Name=&quot;_ModerationStatus&quot;/&gt;&lt;FieldRef Name=&quot;FileRef&quot;/&gt;&lt;FieldRef Name=&quot;FileDirRef&quot;/&gt;&lt;FieldRef Name=&quot;Created_x0020_Date&quot;/&gt;&lt;FieldRef Name=&quot;File_x0020_Size&quot;/&gt;&lt;FieldRef Name=&quot;FSObjType&quot;/&gt;&lt;FieldRef Name=&quot;CheckedOutUserId&quot;/&gt;&lt;FieldRef Name=&quot;IsCheckedoutToLocal&quot;/&gt;&lt;FieldRef Name=&quot;CheckoutUser&quot;/&gt;&lt;FieldRef Name=&quot;CheckedOutTitle&quot;/&gt;&lt;FieldRef Name=&quot;_CheckinComment&quot;/&gt;&lt;FieldRef Name=&quot;_UIVersion&quot;/&gt;&lt;FieldRef Name=&quot;_UIVersionString&quot;/&gt;&lt;FieldRef Name=&quot;ParentVersionString&quot;/&gt;&lt;FieldRef Name=&quot;ParentLeafName&quot;/&gt;&lt;FieldRef Name=&quot;PermMask&quot;/&gt;&lt;FieldRef Name=&quot;_ModerationComments&quot;/&gt;&lt;FieldRef Name=&quot;LinkCheckedOutTitle&quot;/&gt;&lt;FieldRef Name=&quot;Created_x0020_By&quot;/&gt;&lt;FieldRef Name=&quot;Modified_x0020_By&quot;/&gt;&lt;FieldRef Name=&quot;Edit&quot;/&gt;&lt;FieldRef Name=&quot;_EditMenuTableEnd&quot;/&gt;&lt;FieldRef Name=&quot;_EditMenuTableStart&quot;/&gt;&lt;FieldRef Name=&quot;EncodedAbsUrl&quot;/&gt;&lt;FieldRef Name=&quot;FileSizeDisplay&quot;/&gt;&lt;FieldRef Name=&quot;GUID&quot;/&gt;&lt;FieldRef Name=&quot;xd_ProgID&quot;/&gt;&lt;FieldRef Name=&quot;InstanceID&quot;/&gt;&lt;FieldRef Name=&quot;_IsCurrentVersion&quot;/&gt;&lt;FieldRef Name=&quot;xd_Signature&quot;/&gt;&lt;FieldRef Name=&quot;_Level&quot;/&gt;&lt;FieldRef Name=&quot;Combine&quot;/&gt;&lt;FieldRef Name=&quot;Last_x0020_Modified&quot;/&gt;&lt;FieldRef Name=&quot;BaseName&quot;/&gt;&lt;FieldRef Name=&quot;LinkFilename&quot;/&gt;&lt;FieldRef Name=&quot;LinkFilenameNoMenu&quot;/&gt;&lt;FieldRef Name=&quot;Order&quot;/&gt;&lt;FieldRef Name=&quot;owshiddenversion&quot;/&gt;&lt;FieldRef Name=&quot;ProgId&quot;/&gt;&lt;FieldRef Name=&quot;MetaInfo&quot;/&gt;&lt;FieldRef Name=&quot;RepairDocument&quot;/&gt;&lt;FieldRef Name=&quot;ScopeId&quot;/&gt;&lt;FieldRef Name=&quot;SelectFilename&quot;/&gt;&lt;FieldRef Name=&quot;SelectTitle&quot;/&gt;&lt;FieldRef Name=&quot;ServerUrl&quot;/&gt;&lt;FieldRef Name=&quot;_SharedFileIndex&quot;/&gt;&lt;FieldRef Name=&quot;DocIcon&quot;/&gt;&lt;FieldRef Name=&quot;UniqueId&quot;/&gt;&lt;FieldRef Name=&quot;VirusStatus&quot;/&gt;&lt;FieldRef Name=&quot;WorkflowInstanceID&quot;/&gt;&lt;FieldRef Name=&quot;WorkflowVersion&quot;/&gt;&lt;/ViewFields&gt;&lt;/View&gt;" UseInternalName="true" IncludeHidden="True" Scope="Recursive" ID="datasource1"><SelectParameters><asp:Parameter Name="ListID" DefaultValue="{FF5560B5-40E9-4B88-92FF-2BEB08ED4E65}"/><asp:Parameter Name="StartRowIndex" DefaultValue="0"/><asp:Parameter Name="nextpagedata" DefaultValue="0"/><asp:Parameter Name="MaximumRows" DefaultValue="20"/><WebPartPages:DataFormParameter Name="study" ParameterKey="study" PropertyName="ParameterValues"/></SelectParameters><UpdateParameters><asp:Parameter Name="ListID" DefaultValue="{FF5560B5-40E9-4B88-92FF-2BEB08ED4E65}"/></UpdateParameters><InsertParameters><asp:Parameter Name="ListID" DefaultValue="{FF5560B5-40E9-4B88-92FF-2BEB08ED4E65}"/></InsertParameters><DeleteParameters><asp:Parameter Name="ListID" DefaultValue="{FF5560B5-40E9-4B88-92FF-2BEB08ED4E65}"/></DeleteParameters>
+	</SharePoint:SPDataSource>
+</DataSources>
+<Xsl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+								
+								
+								
+								<xsl:stylesheet version="1.0" exclude-result-prefixes="rs z o s ddwrt dt msxsl" xmlns:msxsl="urn:schemas-microsoft-com:xslt" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:SharePoint="Microsoft.SharePoint.WebControls" xmlns:__designer="http://schemas.microsoft.com/WebParts/v2/DataView/designer" xmlns:asp="http://schemas.microsoft.com/ASPNET/20" xmlns:ddwrt="http://schemas.microsoft.com/WebParts/v2/DataView/runtime" xmlns:o="urn:schemas-microsoft-com:office" xmlns:s="uuid:BDC6E3F0-6DA3-11d1-A2A3-00AA00C14882" xmlns:dt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882" xmlns:rs="urn:schemas-microsoft-com:rowset" xmlns:z="#RowsetSchema" xmlns:ddwrt2="urn:frontpage:internal"><xsl:output method="html" indent="no" /><xsl:decimal-format NaN="" />
+									<xsl:param name="PageUrl" />
+									<xsl:param name="PagePath" />
+									<xsl:param name="HttpHost" />
+									<xsl:param name="HttpPath" />
+									<xsl:param name="List" />
+									<xsl:param name="URL_Display" />
+									<xsl:param name="HttpVDir" />
+									<xsl:param name="View" />
+									<xsl:param name="FilterLink" select="ddwrt:FilterLink()" />
+									<xsl:param name="Language">1033</xsl:param>
+									<xsl:param name="dvt_adhocmode">sort</xsl:param>
+									<xsl:param name="dvt_fieldsort">1</xsl:param>
+									<xsl:param name="dvt_sortfield"></xsl:param>
+									<xsl:param name="dvt_sortdir">ascending</xsl:param>
+									<xsl:param name="dvt_filterfield"></xsl:param>
+									<xsl:param name="dvt_firstrow">1</xsl:param>
+									<xsl:param name="dvt_p2plinkfields"></xsl:param>
+									<xsl:param name="dvt_nextpagedata"></xsl:param>
+									<xsl:param name="dvt_sorttype">text</xsl:param>
+									<xsl:param name="dvt_apos">&apos;</xsl:param>
+									<xsl:param name="filterParam" ddwrt:NoCAMLVariable="1"></xsl:param>
+									<xsl:param name="ImagesPath"></xsl:param>
+									<xsl:param name="ListUrlDir"></xsl:param>
+									<xsl:param name="EMail">EMail</xsl:param>
+									<xsl:param name="Userid"></xsl:param>
+									<xsl:variable name="dvt_1_automode">0</xsl:variable>
+									<xsl:param name="URL_DISPLAY" />
+									<xsl:param name="URL_EDIT" />
+									<xsl:variable name="IDATOUDD">
+										<xsl:choose>
+											<xsl:when test="ddwrt:GetVar('ClassInfo')='Menu'">ms-vb-title&quot; height=&quot;100%</xsl:when>
+											<xsl:when test="ddwrt:GetVar('ClassInfo')='Icon'"></xsl:when>
+											<xsl:otherwise>ms-vb2</xsl:otherwise>
+										</xsl:choose>
+									</xsl:variable>
+									<xsl:param name="URL_Edit" />
+									<xsl:param name="URL_Lookup" />
+									<xsl:param name="dvt_filterfields" />
+									<xsl:param name="dvt_partguid" />
+									<xsl:param name="ListID">{FF5560B5-40E9-4B88-92FF-2BEB08ED4E65}</xsl:param>
+									<xsl:param name="RootFolder" />
+									<xsl:param name="study" />
+									<xsl:template match="/" xmlns:SharePoint="Microsoft.SharePoint.WebControls" xmlns:__designer="http://schemas.microsoft.com/WebParts/v2/DataView/designer" xmlns:asp="http://schemas.microsoft.com/ASPNET/20">
+										<xsl:call-template name="dvt_1" />
+									</xsl:template>
+									
+									
+									
+									<xsl:template name="dvt_1">
+										<xsl:variable name="dvt_StyleName">Table</xsl:variable>
+										<xsl:variable name="Rows" select="/dsQueryResponse/Rows/Row" />
+										<xsl:variable name="dvt_RowCount" select="count($Rows)" />
+										<xsl:variable name="RowLimit">20</xsl:variable>
+										<xsl:variable name="FirstRow" select="$dvt_firstrow" />
+										<xsl:variable name="LastRow" select="$FirstRow + $dvt_RowCount - 1" />
+										<xsl:variable name="IsEmpty" select="$dvt_RowCount = 0 or $RowLimit = 0" />
+										<xsl:variable name="dvt_IsEmpty" select="$dvt_RowCount = 0" />
+										<xsl:choose>
+											<xsl:when test="$dvt_IsEmpty">
+												<xsl:call-template name="dvt_1.empty" />
+											</xsl:when>
+											<xsl:otherwise>
+												<xsl:choose>
+													<xsl:when test="$dvt_IsEmpty">
+														<xsl:text disable-output-escaping="yes">&lt;SCRIPT&gt;
+															ctx = new ContextInfo();
+														ctx.listBaseType = </xsl:text>
+														<xsl:value-of select="ddwrt:ListProperty('BaseType')" />
+														;
+														ctx.listTemplate = <xsl:value-of select="ddwrt:ListProperty('ServerTemplate')" />;
+														ctx.listName = &quot;<xsl:value-of select="$List" />&quot;;
+														ctx.view = &quot;<xsl:value-of select="ddwrt:GetVar('View')" />&quot;;
+														ctx.listUrlDir = &quot;<xsl:value-of select="$ListUrlDir" />&quot;;
+														ctx.HttpPath = &quot;<xsl:value-of select="$HttpPath" />&quot;;
+														ctx.HttpRoot = &quot;<xsl:value-of select="$HttpVDir" />&quot;;
+														ctx.imagesPath = &quot;/_layouts/images/&quot;;
+														ctx.PortalUrl = &quot;web&quot;;
+														ctx.SendToLocationName = &quot;<xsl:value-of select="ddwrt:ListProperty('SendToLocationName')" />&quot;;
+														ctx.SendToLocationUrl = &quot;<xsl:value-of select="ddwrt:ListProperty('SendToLocationUrl')" />&quot;;
+														ctx.RecycleBinEnabled = <xsl:value-of select="1" />;
+														ctx.OfficialFileName = &quot;&quot;;
+														ctx.WriteSecurity = &quot;<xsl:value-of select="ddwrt:ListProperty('WriteSecurity')" />&quot;;
+														ctx.SiteTitle = &quot;web&quot;;
+														ctx.ListTitle = &quot;<xsl:value-of select="ddwrt:ListProperty('Title')" />&quot;;
+														if (ctx.PortalUrl == &quot;&quot;) ctx.PortalUrl = null;
+														ctx.displayFormUrl = &quot;<xsl:value-of select="$URL_DISPLAY" />&quot;;
+														ctx.editFormUrl = &quot;<xsl:value-of select="$URL_EDIT" />&quot;;
+														ctx.isWebEditorPreview = 
+														<xsl:choose>
+															<xsl:when test="ddwrt:GetVar('WebEditorPreview')='TRUE'">1</xsl:when>
+															<xsl:otherwise>0</xsl:otherwise>
+														</xsl:choose>
+														;
+														ctx.ctxId = 18788;
+														g_ViewIdToViewCounterMap[ &quot;<xsl:value-of select="ddwrt:GetVar('View')" />&quot; ]= 18788;
+														ctx.CurrentUserId = <xsl:value-of select="$Userid" />;
+														<xsl:choose>
+															<xsl:when test="ddwrt:ListProperty('ModeratedList')='1'">
+															ctx.isModerated = true;</xsl:when>
+														</xsl:choose>
+														<xsl:choose>
+															<xsl:when test="ddwrt:ListProperty('ForceCheckout')='1'">
+															ctx.isForceCheckout = true;</xsl:when>
+														</xsl:choose>
+														<xsl:choose>
+															<xsl:when test="ddwrt:ListProperty('EnableMinorVersions')='1'">
+															ctx.EnableMinorVersions = true;</xsl:when>
+														</xsl:choose>
+														<xsl:choose>
+															<xsl:when test="ddwrt:ListProperty('VersioningEnabled')='1'">
+															ctx.verEnabled = 1;</xsl:when>
+														</xsl:choose>
+														<xsl:choose>
+															<xsl:when test="ddwrt:GetVar('RecursiveView')='1'">
+															ctx.recursiveView = true;</xsl:when>
+														</xsl:choose>
+														<xsl:choose>
+															<xsl:when test="ddwrt:ListProperty('WorkflowsAssociated')='1'">
+															ctx.WorkflowsAssociated = true;</xsl:when>
+														</xsl:choose>
+														<xsl:choose>
+															<xsl:when test="ddwrt:ListProperty('EnableContentTypes')='1'">
+															ctx.ContentTypesEnabled = true;</xsl:when>
+														</xsl:choose>
+														
+														ctx18788
+														<xsl:text disable-output-escaping="yes"> = ctx;
+														&lt;/SCRIPT&gt;</xsl:text>
+														<xsl:choose>
+															<xsl:when test="ddwrt:ListProperty('Direction')='ltr'">
+																<xsl:text disable-output-escaping="yes">&lt;SCRIPT&gt;FixTextAlignForBidi(&quot;left&quot;);&lt;/SCRIPT&gt;</xsl:text>
+															</xsl:when>
+															<xsl:when test="ddwrt:ListProperty('Direction')='rtl'">
+																<xsl:text disable-output-escaping="yes">&lt;SCRIPT&gt;FixTextAlignForBidi(&quot;right&quot;);&lt;/SCRIPT&gt;</xsl:text>
+															</xsl:when>
+														</xsl:choose>
+														<TABLE width="100%" class="ms-listviewtable" cellspacing="0" cellpadding="0" border="0" dir="{ddwrt:ListProperty('Direction')}"><tr><td><TABLE ID="onetidDoclibViewTbl0" width="100%" cellpadding="0" cellspacing="0" Summary="{ddwrt:ListProperty('Title')}" border="0"><TR class="ms-viewheadertr"><IFRAME src="javascript:false;" id="FilterIframe18788" name="FilterIframe18788" style="display:none" height="0" width="0" title="Hidden frame to filter list" FilterLink="{$FilterLink}"></IFRAME><!--DocIcon--><!--Type--><TH nowrap="" scope="col" class="ms-vh2">
+															<xsl:variable name="IDASD2RC"></xsl:variable>
+															<xsl:variable name="IDALJ2RC"></xsl:variable>
+															<xsl:choose>
+																<xsl:when test="'TRUE'='TRUE'">Type</xsl:when>
+															</xsl:choose>
+															<IMG SRC="{ddwrt:FieldFilterImageUrl('DocIcon')}" BORDER="0" ALT="" /></TH><!--LinkFilename--><!--Name--><TH nowrap="" scope="col" class="ms-vh2">
+															<xsl:variable name="IDASD2RC"></xsl:variable>
+															<xsl:variable name="IDALJ2RC"></xsl:variable>
+															<xsl:choose>
+																<xsl:when test="'TRUE'='TRUE'">Name</xsl:when>
+															</xsl:choose>
+															</TH><!--Modified--><!--Modified--><TH nowrap="" scope="col" class="ms-vh2">
+															<xsl:variable name="IDAECXUC"></xsl:variable>
+															<xsl:choose>
+																<xsl:when test="'TRUE'='TRUE'">Modified</xsl:when>
+															</xsl:choose>
+															<IMG SRC="{ddwrt:FieldFilterImageUrl('Modified')}" BORDER="0" ALT="" /></TH><!--Editor--><!--Modified By--><TH nowrap="" scope="col" class="ms-vh2">
+															<xsl:variable name="IDAGN3RC"></xsl:variable>
+															<xsl:variable name="IDA4R3RC"></xsl:variable>
+															<xsl:choose>
+																<xsl:when test="'TRUE'='TRUE'">Modified By</xsl:when>
+															</xsl:choose>
+															<IMG SRC="{ddwrt:FieldFilterImageUrl('Editor')}" BORDER="0" ALT="" /></TH><!--StudyName--><!--StudyName--><TH nowrap="" scope="col" class="ms-vh2">
+															<xsl:variable name="IDAWZVDD"></xsl:variable>
+															<xsl:choose>
+																<xsl:when test="'TRUE'='TRUE'">StudyName</xsl:when>
+															</xsl:choose>
+															<IMG SRC="{ddwrt:FieldFilterImageUrl('StudyName')}" BORDER="0" ALT="" /></TH><!--Flag--><!--Flag--><TH nowrap="" scope="col" class="ms-vh2">
+															<xsl:variable name="IDADJRBD"></xsl:variable>
+															<xsl:choose>
+																<xsl:when test="'TRUE'='TRUE'">Flag</xsl:when>
+															</xsl:choose>
+															<IMG SRC="{ddwrt:FieldFilterImageUrl('Flag')}" BORDER="0" ALT="" /></TH><!--BU--><!--BU--><TH nowrap="" scope="col" class="ms-vh2">
+															<xsl:variable name="IDAGN3RC"></xsl:variable>
+															<xsl:variable name="IDA4R3RC"></xsl:variable>
+															<xsl:choose>
+																<xsl:when test="'TRUE'='TRUE'">BU</xsl:when>
+															</xsl:choose>
+															<IMG SRC="{ddwrt:FieldFilterImageUrl('BU')}" BORDER="0" ALT="" /></TH><!--GC--><!--GC--><TH nowrap="" scope="col" class="ms-vh2">
+															<xsl:variable name="IDAGN3RC"></xsl:variable>
+															<xsl:variable name="IDA4R3RC"></xsl:variable>
+															<xsl:choose>
+																<xsl:when test="'TRUE'='TRUE'">GC</xsl:when>
+															</xsl:choose>
+															<IMG SRC="{ddwrt:FieldFilterImageUrl('GC')}" BORDER="0" ALT="" /></TH><!--Stats--><!--Stats--><TH nowrap="" scope="col" class="ms-vh2">
+															<xsl:variable name="IDAGN3RC"></xsl:variable>
+															<xsl:variable name="IDA4R3RC"></xsl:variable>
+															<xsl:choose>
+																<xsl:when test="'TRUE'='TRUE'">Stats</xsl:when>
+															</xsl:choose>
+															<IMG SRC="{ddwrt:FieldFilterImageUrl('Stats')}" BORDER="0" ALT="" /></TH><!--BioInformatics--><!--BioInformatics--><TH nowrap="" scope="col" class="ms-vh2">
+															<xsl:variable name="IDAGN3RC"></xsl:variable>
+															<xsl:variable name="IDA4R3RC"></xsl:variable>
+															<xsl:choose>
+																<xsl:when test="'TRUE'='TRUE'">BioInformatics</xsl:when>
+															</xsl:choose>
+															<IMG SRC="{ddwrt:FieldFilterImageUrl('BioInformatics')}" BORDER="0" ALT="" /></TH><!--ID--><!--ID--><TH nowrap="" scope="col" class="ms-vh2">
+															<xsl:variable name="IDAL2VPD"></xsl:variable>
+															<xsl:choose>
+																<xsl:when test="'TRUE'='TRUE'">ID</xsl:when>
+															</xsl:choose>
+															<IMG SRC="{ddwrt:FieldFilterImageUrl('ID')}" BORDER="0" ALT="" /></TH><!--Title--><!--GSSID--><TH nowrap="" scope="col" class="ms-vh2">
+															<xsl:variable name="IDAWZVDD"></xsl:variable>
+															<xsl:choose>
+																<xsl:when test="'TRUE'='TRUE'">GSSID</xsl:when>
+															</xsl:choose>
+															<IMG SRC="{ddwrt:FieldFilterImageUrl('Title')}" BORDER="0" ALT="" /></TH><!--Author--><!--Created By--><TH nowrap="" scope="col" class="ms-vh2">
+															<xsl:variable name="IDAGN3RC"></xsl:variable>
+															<xsl:variable name="IDA4R3RC"></xsl:variable>
+															<xsl:choose>
+																<xsl:when test="'TRUE'='TRUE'">Created By</xsl:when>
+															</xsl:choose>
+															<IMG SRC="{ddwrt:FieldFilterImageUrl('Author')}" BORDER="0" ALT="" /></TH><!--StudyID--><!--StudyID--><TH nowrap="" scope="col" class="ms-vh2">
+															<xsl:variable name="IDAWZVDD"></xsl:variable>
+															<xsl:choose>
+																<xsl:when test="'TRUE'='TRUE'">StudyID</xsl:when>
+															</xsl:choose>
+														<IMG SRC="{ddwrt:FieldFilterImageUrl('StudyID')}" BORDER="0" ALT="" /></TH></TR></TABLE></td></tr><tr><td><TABLE width="100%" border="0"><TR>
+														<xsl:choose>
+															<xsl:when test="ddwrt:GetVar('SearchString')=''"><TD Class="ms-vb"> 
+																<xsl:choose>
+																	<xsl:when test="ddwrt:IfHasRights(2)"> To create a new item, click &quot;New&quot; or &quot;Upload&quot; above.</xsl:when>
+																	<xsl:otherwise></xsl:otherwise>
+																</xsl:choose>
+															</TD></xsl:when>
+														</xsl:choose>
+														</TR></TABLE></td></tr></TABLE>
+													</xsl:when>
+													<xsl:otherwise><TABLE width="100%" cellspacing="0" cellpadding="0" border="0">
+														<xsl:text disable-output-escaping="yes">&lt;SCRIPT&gt;
+															ctx = new ContextInfo();
+														ctx.listBaseType = </xsl:text>
+														<xsl:value-of select="ddwrt:ListProperty('BaseType')" />
+														;
+														ctx.listTemplate = <xsl:value-of select="ddwrt:ListProperty('ServerTemplate')" />;
+														ctx.listName = &quot;<xsl:value-of select="$List" />&quot;;
+														ctx.view = &quot;<xsl:value-of select="ddwrt:GetVar('View')" />&quot;;
+														ctx.listUrlDir = &quot;<xsl:value-of select="$ListUrlDir" />&quot;;
+														ctx.HttpPath = &quot;<xsl:value-of select="$HttpPath" />&quot;;
+														ctx.HttpRoot = &quot;<xsl:value-of select="$HttpVDir" />&quot;;
+														ctx.imagesPath = &quot;/_layouts/images/&quot;;
+														ctx.PortalUrl = &quot;web&quot;;
+														ctx.SendToLocationName = &quot;<xsl:value-of select="ddwrt:ListProperty('SendToLocationName')" />&quot;;
+														ctx.SendToLocationUrl = &quot;<xsl:value-of select="ddwrt:ListProperty('SendToLocationUrl')" />&quot;;
+														ctx.RecycleBinEnabled = <xsl:value-of select="1" />;
+														ctx.OfficialFileName = &quot;&quot;;
+														ctx.WriteSecurity = &quot;<xsl:value-of select="ddwrt:ListProperty('WriteSecurity')" />&quot;;
+														ctx.SiteTitle = &quot;web&quot;;
+														ctx.ListTitle = &quot;<xsl:value-of select="ddwrt:ListProperty('Title')" />&quot;;
+														if (ctx.PortalUrl == &quot;&quot;) ctx.PortalUrl = null;
+														ctx.displayFormUrl = &quot;<xsl:value-of select="$URL_DISPLAY" />&quot;;
+														ctx.editFormUrl = &quot;<xsl:value-of select="$URL_EDIT" />&quot;;
+														ctx.isWebEditorPreview = 
+														<xsl:choose>
+															<xsl:when test="ddwrt:GetVar('WebEditorPreview')='TRUE'">1</xsl:when>
+															<xsl:otherwise>0</xsl:otherwise>
+														</xsl:choose>
+														
+														;
+														ctx.ctxId = 18788;
+														g_ViewIdToViewCounterMap[ &quot;<xsl:value-of select="ddwrt:GetVar('View')" />&quot; ]= 18788;
+														ctx.CurrentUserId = <xsl:value-of select="$Userid" />;
+														<xsl:choose>
+															<xsl:when test="ddwrt:ListProperty('ModeratedList')='1'">
+															ctx.isModerated = true;</xsl:when>
+														</xsl:choose>
+														<xsl:choose>
+															<xsl:when test="ddwrt:ListProperty('ForceCheckout')='1'">
+															ctx.isForceCheckout = true;</xsl:when>
+														</xsl:choose>
+														<xsl:choose>
+															<xsl:when test="ddwrt:ListProperty('EnableMinorVersions')='1'">
+															ctx.EnableMinorVersions = true;</xsl:when>
+														</xsl:choose>
+														<xsl:choose>
+															<xsl:when test="ddwrt:ListProperty('VersioningEnabled')='1'">
+															ctx.verEnabled = 1;</xsl:when>
+														</xsl:choose>
+														<xsl:choose>
+															<xsl:when test="ddwrt:GetVar('RecursiveView')='1'">
+															ctx.recursiveView = true;</xsl:when>
+														</xsl:choose>
+														<xsl:choose>
+															<xsl:when test="ddwrt:ListProperty('WorkflowsAssociated')='1'">
+															ctx.WorkflowsAssociated = true;</xsl:when>
+														</xsl:choose>
+														<xsl:choose>
+															<xsl:when test="ddwrt:ListProperty('EnableContentTypes')='1'">
+															ctx.ContentTypesEnabled = true;</xsl:when>
+														</xsl:choose>
+														
+														
+														
+														ctx18788
+														<xsl:text disable-output-escaping="yes"> = ctx;
+														&lt;/SCRIPT&gt;</xsl:text>
+														<xsl:choose>
+															<xsl:when test="ddwrt:ListProperty('Direction')='ltr'">
+																<xsl:text disable-output-escaping="yes">&lt;SCRIPT&gt;FixTextAlignForBidi(&quot;left&quot;);&lt;/SCRIPT&gt;</xsl:text>
+															</xsl:when>
+															<xsl:when test="ddwrt:ListProperty('Direction')='rtl'">
+																<xsl:text disable-output-escaping="yes">&lt;SCRIPT&gt;FixTextAlignForBidi(&quot;right&quot;);&lt;/SCRIPT&gt;</xsl:text>
+															</xsl:when>
+														</xsl:choose>
+														<xsl:text disable-output-escaping="yes">&lt;SCRIPT LANGUAGE=&quot;VBSCRIPT&quot;&gt;
+															On Error Resume Next
+															Set EditDocumentButton = CreateObject(&quot;SharePoint.OpenDocuments.3&quot;)
+															If (IsObject(EditDocumentButton)) Then
+															fNewDoc3 = true
+															Else
+															Set EditDocumentButton = CreateObject(&quot;SharePoint.OpenDocuments.2&quot;)
+															If (IsObject(EditDocumentButton)) Then
+															fNewDoc2 = true
+															Else
+															Set EditDocumentButton = CreateObject(&quot;SharePoint.OpenDocuments.1&quot;)
+															End If
+															End If    
+															fNewDoc = IsObject(EditDocumentButton)
+														&lt;/SCRIPT&gt;</xsl:text>
+														<tr><td><TABLE ID="onetidDoclibViewTbl0" width="100%" class="ms-listviewtable" border="0" cellspacing="0" cellpadding="1" dir="{ddwrt:ListProperty('Direction')}" summary="{ddwrt:ListProperty('Title')}"><TR class="ms-viewheadertr" VALIGN="TOP"><IFRAME src="javascript:false;" id="I1" name="I1" style="display:none" height="0" width="0" title="Hidden frame to filter list" FilterLink="{$FilterLink}"></IFRAME>
+															<xsl:if test="$dvt_1_automode = '1'" ddwrt:cf_ignore="1"><TH class="ms-vh" width="1" nowrap="nowrap" /></xsl:if>
+															<!--DocIcon-->
+															<!--Type--><TH nowrap="" scope="col" class="ms-vh2">
+																<xsl:call-template name="dvt.headerfield" ddwrt:atomic="1" xmlns:ddwrt="http://schemas.microsoft.com/WebParts/v2/DataView/runtime">
+																	<xsl:with-param name="fieldname">@DocIcon</xsl:with-param>
+																	<xsl:with-param name="fieldtitle">Type</xsl:with-param>
+																	<xsl:with-param name="displayname">Type</xsl:with-param>
+																	<xsl:with-param name="sortable">0</xsl:with-param>
+																	<xsl:with-param name="fieldtype">Text</xsl:with-param>
+																</xsl:call-template>
+															</TH>
+															<!--LinkFilename-->
+															<!--Name-->
+															<!--Modified-->
+															<!--Modified-->
+															<!--Editor-->
+															<!--Modified By-->
+															<!--StudyName-->
+															<!--StudyName-->
+															<!--Flag-->
+															<!--Flag-->
+															<!--BU-->
+															<!--BU-->
+															<!--GC-->
+															<!--GC-->
+															<!--Stats-->
+															<!--Stats-->
+															<!--BioInformatics-->
+															<!--BioInformatics-->
+															<!--ID-->
+															<!--ID-->
+															<!--Title-->
+															<!--GSSID-->
+															<!--Author-->
+															<!--Created By-->
+															<!--StudyID-->
+														<!--StudyID--><th class="ms-vh" nowrap="">Name (for use in forms)</th></TR>
+														<xsl:call-template name="dvt_1.body">
+																		<xsl:with-param name="ParentPath" />
+																		<xsl:with-param name="Rows" select="$Rows" />
+																		<xsl:with-param name="FirstRow" select="1" />
+																		<xsl:with-param name="LastRow" select="$LastRow - $FirstRow + 1" />
+															
+														</xsl:call-template>
+														</TABLE>
+														<xsl:choose>
+															<xsl:when test="ddwrt:GetVar('SearchString')=''"></xsl:when>
+														</xsl:choose>
+														</td></tr>
+													</TABLE></xsl:otherwise>
+												</xsl:choose>
+												<xsl:call-template name="dvt_1.commandfooter">
+													<xsl:with-param name="FirstRow" select="$FirstRow" />
+													<xsl:with-param name="LastRow" select="$LastRow" />
+													<xsl:with-param name="RowLimit" select="$RowLimit" />
+													<xsl:with-param name="dvt_RowCount" select="$dvt_RowCount" />
+													<xsl:with-param name="RealLastRow" select="number(ddwrt:NameChanged('',-100))" />
+												</xsl:call-template></xsl:otherwise>
+										</xsl:choose>
+										
+									</xsl:template>
+									<xsl:template name="dvt_1.body">
+										<xsl:param name="ParentPath" />
+										<xsl:param name="Rows" />
+										<xsl:param name="FirstRow" />
+										<xsl:param name="LastRow" />
+										<xsl:for-each select="$Rows">
+											<xsl:sort select="*[name() = $dvt_sortfield] | @*[name() = $dvt_sortfield] | text()[name(ancestor::*[1]) = $dvt_sortfield]" order="{$dvt_sortdir}" data-type="{$dvt_sorttype}" />
+											<xsl:variable name="dvt_KeepItemsTogether" select="false()" />
+											
+											<xsl:variable name="dvt_HideGroupDetail" select="false()" />
+											<xsl:if test=" (position() &gt;=$FirstRow and position() &lt;= $LastRow) or $dvt_KeepItemsTogether">
+															<xsl:if test="not($dvt_HideGroupDetail)" ddwrt:cf_ignore="1">
+																			<xsl:variable name="SrcPos"><xsl:number /></xsl:variable>
+																			<xsl:call-template name="dvt_1.rowview">
+																							<xsl:with-param name="ParentPath" select="$ParentPath" />
+																							<xsl:with-param name="SrcPos" select="$SrcPos" />
+																			</xsl:call-template>
+												</xsl:if>
+											</xsl:if>
+										</xsl:for-each>
+									</xsl:template>
+									<xsl:template name="dvt_1.rowview">
+										<xsl:param name="ParentPath" />
+										<xsl:param name="SrcPos" />
+										<TR>
+											<xsl:if test="position() mod 2 = 0" ddwrt:cf_ignore="1">
+												<xsl:attribute name="class">ms-alternating</xsl:attribute>
+											</xsl:if>
+											<xsl:if test="$dvt_1_automode = '1'" ddwrt:cf_ignore="1"><td class="ms-vb" nowrap="nowrap">
+												<xsl:call-template name="dvt_1.automode">
+													<xsl:with-param name="KeyField">ID</xsl:with-param>
+													<xsl:with-param name="KeyValue" select="ddwrt:EscapeDelims(string(@ID))" />
+													<xsl:with-param name="Mode">ID</xsl:with-param>
+												</xsl:call-template>
+											</td></xsl:if>
+											<xsl:choose>
+												<xsl:when test="ddwrt:GetVar('AlternateStyle')='ms-alternating'">
+													<xsl:variable name="VarIDAIOUDD" select="ddwrt:SetVar('AlternateStyle', '')" />
+												</xsl:when>
+												<xsl:otherwise>
+													<xsl:variable name="VarIDAMOUDD" select="ddwrt:SetVar('AlternateStyle', 'ms-alternating')" />
+												</xsl:otherwise>
+											</xsl:choose>
+											
+											<!--DocIcon-->
+											<!--Type-->
+											<TD Class="{$IDATOUDD}">
+												<xsl:variable name="FieldIDAJ0IXC">
+													<xsl:choose>
+														<xsl:when test="@IsCheckedoutToLocal=''"></xsl:when>
+														<xsl:otherwise><A HREF="{ddwrt:URLLookup('', 'IsCheckedoutToLocal', string(@ID))}"><xsl:value-of select="@IsCheckedoutToLocal" /></A></xsl:otherwise>
+													</xsl:choose>
+												</xsl:variable>
+												<xsl:choose>
+													<xsl:when test="@FSObjType='1'">
+														<xsl:choose>
+															<xsl:when test="ddwrt:GetVar('RecursiveView')='1'"><IMG BORDER="0" alt="Folder: {@FileLeafRef}" SRC="/_layouts/images/folder.gif" /></xsl:when>
+															<xsl:otherwise>
+																<xsl:variable name="SetVarIDA2VIXC"><xsl:value-of select="$PagePath" />?RootFolder=<xsl:value-of select="@FileRef" />&amp;FolderCTID=<xsl:value-of select="@ContentTypeId" /></xsl:variable>
+																<xsl:value-of select="ddwrt:SetVar('UnencodedFilterLink', string($SetVarIDA2VIXC))" />
+																<A TABINDEX="-1" HREF="{ddwrt:GetVar('UnencodedFilterLink')}" onclick="javascript:EnterFolder('{ddwrt:GetVar('UnencodedFilterLink')}');javascript:return false;"><IMG BORDER="0" alt="Folder: {@FileLeafRef}" title="Folder: {@FileLeafRef}" SRC="/_layouts/images/folder.gif" /></A>
+															</xsl:otherwise>
+														</xsl:choose>
+													</xsl:when>
+													<xsl:otherwise><A TABINDEX="-1" HREF="{@FileRef}" onclick="return DispEx(this,event,'','','','','{ddwrt:ListProperty(&quot;DefaultItemOpen&quot;)}','{ddwrt:MapToControl(&quot;&quot;, string())}','{@HTML_x0020_File_x0020_Type}','','{ddwrt:GetUserID('CheckoutUser')}','{$Userid}','{ddwrt:ListProperty(&quot;ForceCheckout&quot;)}','{$FieldIDAJ0IXC}','{@PermMask}')">
+														<xsl:choose>
+															<xsl:when test="@CheckoutUser=''"><IMG BORDER="0" ALT="{@FileLeafRef}" title="{@FileLeafRef}" SRC="/_layouts/images/{ddwrt:MapToIcon(string(@HTML_x0020_File_x0020_Type),string(@File_x0020_Type))}" /></xsl:when>
+															<xsl:otherwise><IMG BORDER="0" ALT="{@FileLeafRef}
+																Checked Out To: {@CheckoutUser}" title="{@FileLeafRef}
+																Checked Out To: {@CheckoutUser}" SRC="/_layouts/images/{ddwrt:MapToIcon(string(@HTML_x0020_File_x0020_Type),string(@File_x0020_Type))}" /><img src="/_layouts/images/checkoutoverlay.gif" class="ms-vb-icon-overlay" alt="&lt;xsl:value-of select=&quot;@FileLeafRef&quot; /&gt;
+																Checked Out To: ddwrt:UserLookup(string(@DocIcon), &quot;Title&quot;)&lt;" title="&lt;xsl:value-of select=&quot;@FileLeafRef&quot; /&gt;
+															Checked Out To: ddwrt:UserLookup(string(@DocIcon), &quot;Title&quot;)" style="left: -7px; bottom: -2px" width="9" /></xsl:otherwise>
+														</xsl:choose>
+													</A></xsl:otherwise>
+												</xsl:choose>
+											</TD>
+											<!--LinkFilename-->
+											<!--Name--><!--Modified-->
+											<!--Modified-->
+											<!--Editor-->
+											<!--Modified By-->
+											<!--StudyName-->
+											<!--StudyName-->
+											<!--Flag-->
+											<!--Flag-->
+											<!--BU-->
+											<!--BU-->
+											<!--GC-->
+											<!--GC-->
+											<!--Stats-->
+											<!--Stats-->
+											<!--BioInformatics-->
+											<!--BioInformatics-->
+											<!--ID-->
+											<!--ID-->
+											<!--Title-->
+											<!--GSSID-->
+											<!--Author-->
+											<!--Created By-->
+											<!--StudyID-->
+											<!--StudyID--><td width="100%" Class="ms-vb" style="height: 16px">
+	<xsl:variable name="VarIDAHO31I" select="ddwrt:SetVar('ShowAccessibleIcon', '1')" />
+	<xsl:variable name="FieldIDADM31I">
+		<xsl:choose>
+			<xsl:when test="@IsCheckedoutToLocal=''"></xsl:when>
+			<xsl:otherwise><A HREF="{ddwrt:URLLookup('', 'IsCheckedoutToLocal', string(@ID))}"><xsl:value-of select="@IsCheckedoutToLocal" /></A></xsl:otherwise>
+		</xsl:choose>
+	</xsl:variable>
+	<xsl:choose>
+		<xsl:when test="@FSObjType='1'">
+			<xsl:choose>
+				<xsl:when test="ddwrt:GetVar('RecursiveView')='1'"><xsl:value-of select="@FileLeafRef" /></xsl:when>
+				<xsl:otherwise>
+					<xsl:variable name="SetVarIDAUH31I"><xsl:value-of select="$PagePath" />?RootFolder=<xsl:value-of select="@FileRef" />&amp;FolderCTID=<xsl:value-of select="@ContentTypeId" /></xsl:variable>
+					<xsl:value-of select="ddwrt:SetVar('UnencodedFilterLink', string($SetVarIDAUH31I))" />
+					<A onfocus="OnLink(this)" HREF="{ddwrt:GetVar('UnencodedFilterLink')}" onclick="javascript:EnterFolder('{ddwrt:GetVar('UnencodedFilterLink')}');return false;"><xsl:value-of select="@FileLeafRef" />
+					<xsl:choose>
+						<xsl:when test="ddwrt:GetVar('ShowAccessibleIcon')='1'"><img src="/_layouts/images/blank.gif" class="ms-hidden" border="0" width="1" height="1" alt="Use SHIFT+ENTER to open the menu (new window)." /></xsl:when>
+						<xsl:otherwise></xsl:otherwise>
+					</xsl:choose>
+					</A>
+				</xsl:otherwise>
+			</xsl:choose>
+		</xsl:when>
+		<xsl:otherwise><A onfocus="OnLink(this)" HREF="{@FileRef}" onclick="return DispEx(this,event,'','','','','{ddwrt:ListProperty(&quot;DefaultItemOpen&quot;)}','{ddwrt:MapToControl(&quot;&quot;, string())}','{@HTML_x0020_File_x0020_Type}','','{ddwrt:GetUserID('CheckoutUser')}','{$Userid}','{ddwrt:ListProperty(&quot;ForceCheckout&quot;)}','{$FieldIDADM31I}','{@PermMask}')"><xsl:value-of select="ddwrt:UrlBaseName(string(@LinkFilename))" />
+			<xsl:choose>
+				<xsl:when test="ddwrt:GetVar('ShowAccessibleIcon')='1'"><img src="/_layouts/images/blank.gif" class="ms-hidden" border="0" width="1" height="1" alt="Use SHIFT+ENTER to open the menu (new window)." /></xsl:when>
+				<xsl:otherwise></xsl:otherwise>
+			</xsl:choose>
+			</A>
+			<xsl:if test="ddwrt:IfNew(string(@Created))"><IMG SRC="/_layouts/1033/images/new.gif" alt="New" /></xsl:if>
+		</xsl:otherwise>
+	</xsl:choose>
+	<xsl:variable name="VarIDAMO31I" select="ddwrt:SetVar('ShowAccessibleIcon', '0')" />
+</td>
+<td style="height: 16px"><img src="/_layouts/images/blank.gif" width="13" style="visibility:hidden" alt="" /></td>
+
+</TR>
+									</xsl:template>
+									<xsl:template name="stringreplace">
+										<xsl:param name="stringvalue" />
+										<xsl:param name="from" />
+										<xsl:param name="to" />
+										<xsl:choose>
+											<xsl:when test="contains($stringvalue, $from)"><xsl:value-of select="substring-before($stringvalue, $from)" />
+												<xsl:if test="contains(substring($stringvalue, 1, string-length($stringvalue) - 1), $from)"><xsl:value-of select="$to" />
+													<xsl:call-template name="stringreplace">
+														<xsl:with-param name="stringvalue" select="substring-after($stringvalue, $from)" />
+														<xsl:with-param name="from" select="$from" />
+														<xsl:with-param name="to" select="$to" />
+													</xsl:call-template>
+												</xsl:if>
+											</xsl:when>
+											<xsl:otherwise><xsl:value-of select="$stringvalue" /></xsl:otherwise>
+										</xsl:choose>
+									</xsl:template>
+									<xsl:template name="dvt.headerfield">
+										<xsl:param name="fieldname" />
+										<xsl:param name="fieldtitle" />
+										<xsl:param name="displayname" />
+										<xsl:param name="sortable">1</xsl:param>
+										<xsl:param name="fieldtype">0</xsl:param>
+										<xsl:choose>
+											<xsl:when test="($dvt_adhocmode = 'sort' or $dvt_fieldsort = '1')and $sortable='1'">
+												<xsl:variable name="sortfield">
+													<xsl:choose>
+														<xsl:when test="substring($fieldname, string-length($fieldname) - 5) = '(text)'">
+															<xsl:value-of select="substring($fieldname, 1, string-length($fieldname) - 6)" />
+														</xsl:when>
+														<xsl:when test="substring($fieldname, 1, 1) = '@'">
+															<xsl:value-of select="substring($fieldname, 2)" />
+														</xsl:when>
+														<xsl:otherwise>
+															<xsl:value-of select="$fieldname" />
+														</xsl:otherwise>
+													</xsl:choose>
+												</xsl:variable>
+												<xsl:variable name="linkdir">
+													<xsl:choose>
+														<xsl:when test="$dvt_sortfield = $sortfield and $dvt_sortdir = 'ascending'">descending</xsl:when>
+														<xsl:otherwise>ascending</xsl:otherwise>
+													</xsl:choose>
+												</xsl:variable>
+												<xsl:variable name="sortText">
+													<xsl:choose>
+														<xsl:when test="$linkdir='descending'">&apos; + &apos;descending&apos; + &apos;</xsl:when>
+														<xsl:otherwise>&apos; + &apos;ascending&apos; + &apos;</xsl:otherwise>
+													</xsl:choose>
+												</xsl:variable>
+												<xsl:variable name="separator" select="' '" />
+												<xsl:variable name="connector" select="';'" />
+												<table CtxNum="1" cellspacing="0" class="ms-unselectedtitle" onmouseover="OnMouseOverAdHocFilter(this, '{concat($displayname,$separator,$fieldname, $separator,$fieldtype, $connector, 1033, $separator, $dvt_partguid)}')">
+													<tr><td width="100%" class="ms-vb" nowrap="">
+														<a>
+														<xsl:attribute name="href">javascript: <xsl:value-of select="ddwrt:GenFireServerEvent(concat('dvt_sortfield={',$sortfield,'};dvt_sortdir={',$sortText,'}'))" />;</xsl:attribute>
+														<xsl:attribute name="onclick">javascript: <xsl:value-of select="ddwrt:GenFireServerEvent(concat('dvt_sortfield={',$sortfield,'};dvt_sortdir={',$sortText,'}'))" />;</xsl:attribute>
+														<xsl:choose>
+															<xsl:when test="$fieldtype = 'Attachments'">
+																<xsl:value-of select="$fieldtitle" disable-output-escaping="yes" />
+															</xsl:when>
+															<xsl:otherwise>
+																<xsl:value-of select="$fieldtitle" />
+															</xsl:otherwise>
+														</xsl:choose>
+														<xsl:if test="$dvt_sortfield = $sortfield">
+															<xsl:choose>
+																<xsl:when test="$dvt_sortdir = 'ascending'">
+																<img border="0" alt="Ascending" src="{ddwrt:FieldSortImageUrl('Desc')}" /></xsl:when>
+																<xsl:when test="$dvt_sortdir = 'descending'">
+																<img border="0" alt="Descending" src="{ddwrt:FieldSortImageUrl('Asc')}" /></xsl:when>
+															</xsl:choose>
+														</xsl:if>
+														</a>
+														<xsl:if test="contains($dvt_filterfields, concat($fieldname, ';' ))">
+															<IMG SRC="/_layouts/images/filter.gif" BORDER="0" ALT="" />
+														</xsl:if>
+													</td>
+													<td><img src="/_layouts/images/blank.gif" width="13" style="visibility: hidden" alt="" /></td>
+													</tr>
+												</table>
+												
+											</xsl:when>
+											<xsl:otherwise>
+												<xsl:choose>
+													<xsl:when test="$fieldtype = 'Attachments'">
+														<xsl:value-of select="$fieldtitle" disable-output-escaping="yes" />
+													</xsl:when>
+													<xsl:otherwise>
+														<xsl:value-of select="$fieldtitle" />
+													</xsl:otherwise>
+												</xsl:choose>
+											</xsl:otherwise>
+										</xsl:choose>
+										<xsl:if test="$dvt_filterfield=$fieldname" ddwrt:cf_ignore="1"><img alt="Filter" src="{ddwrt:FieldFilterImageUrl('')}" /></xsl:if>
+									</xsl:template>
+									<xsl:template name="dvt_1.automode">
+										<xsl:param name="KeyField" />
+										<xsl:param name="KeyValue" />
+										<xsl:param name="Mode" />
+										<table border="0" cellspacing="0" cellpadding="1">
+											<xsl:choose>
+												<xsl:when test="$Mode = 'edit'">
+													<tr>
+														<td class="ms-vb" width="1%" nowrap="nowrap">
+															<a href="javascript: {ddwrt:GenFireServerEvent('__commit')}">save</a>
+														</td>
+													</tr>
+													<tr>
+														<td class="ms-vb" width="1%" nowrap="nowrap">
+															<a href="javascript: {ddwrt:GenFireServerEvent('__cancel')}">cancel</a>
+														</td>
+													</tr>
+												</xsl:when>
+												<xsl:when test="$Mode = 'insert'">
+													<tr>
+														<td class="ms-vb" width="1%" nowrap="nowrap">
+															<a href="javascript: {ddwrt:GenFireServerEvent('__commit')}">save</a>
+														</td>
+													</tr>
+													<tr>
+														<td class="ms-vb" width="1%" nowrap="nowrap">
+															<a href="javascript: {ddwrt:GenFireServerEvent('__cancel')}">cancel</a>
+														</td>
+													</tr>
+												</xsl:when>
+												<xsl:otherwise>
+													<tr>
+														<td class="ms-vb" width="1%" nowrap="nowrap">
+															<a href="javascript: {ddwrt:GenFireServerEvent(concat('__cancel;dvt_1_form_editkey={',$KeyValue,'}'))}">edit</a>
+														</td>
+													</tr>
+													<tr>
+														<td class="ms-vb" width="1%" nowrap="nowrap">
+															<a href="javascript: {ddwrt:GenFireServerEvent(concat('__cancel;__delete={',$KeyField,'=',$KeyValue,'};__commit'))}">delete</a>
+														</td>
+													</tr>
+												</xsl:otherwise>
+											</xsl:choose>
+										</table>
+									</xsl:template>
+									<xsl:template name="dvt_1.commandfooter">
+										<xsl:param name="FirstRow" />
+										<xsl:param name="LastRow" />
+										<xsl:param name="RowLimit" />
+										<xsl:param name="dvt_RowCount" />
+										<xsl:param name="RealLastRow" />
+										<table cellspacing="0" cellpadding="4" border="0" width="100%">
+											<tr>
+												<xsl:if test="$FirstRow &gt; 1 or $dvt_nextpagedata">
+													<xsl:call-template name="dvt_1.navigation">
+														<xsl:with-param name="FirstRow" select="$FirstRow" />
+														<xsl:with-param name="LastRow" select="$LastRow" />
+														<xsl:with-param name="RowLimit" select="$RowLimit" />
+														<xsl:with-param name="dvt_RowCount" select="$dvt_RowCount" />
+														<xsl:with-param name="RealLastRow" select="$RealLastRow" />
+													</xsl:call-template>
+												</xsl:if>
+											</tr>
+										</table>
+									</xsl:template>
+									<xsl:template name="dvt_1.navigation">
+										<xsl:param name="FirstRow" />
+										<xsl:param name="LastRow" />
+										<xsl:param name="RowLimit" />
+										<xsl:param name="dvt_RowCount" />
+										<xsl:param name="RealLastRow" />
+										<xsl:variable name="PrevRow">
+											<xsl:choose>
+												<xsl:when test="$FirstRow - $RowLimit &lt; 1">1</xsl:when>
+												<xsl:otherwise>
+													<xsl:value-of select="$FirstRow - $RowLimit" />
+												</xsl:otherwise>
+											</xsl:choose>
+										</xsl:variable>
+										<xsl:variable name="LastRowValue">
+											<xsl:choose>
+												<xsl:when test="$LastRow &gt; $RealLastRow">
+													<xsl:value-of select="$LastRow"></xsl:value-of>
+												</xsl:when>
+												<xsl:otherwise>
+													<xsl:value-of select="$RealLastRow"></xsl:value-of>
+												</xsl:otherwise>
+											</xsl:choose>
+										</xsl:variable>
+										<xsl:variable name="NextRow">
+											<xsl:value-of select="$LastRowValue + 1"></xsl:value-of>
+										</xsl:variable>
+										<td nowrap="" class="ms-paging" align="right">
+											<xsl:if test="$dvt_firstrow &gt; 1" ddwrt:cf_ignore="1">
+												<a>
+												<xsl:attribute name="href">javascript: <xsl:value-of select="ddwrt:GenFireServerEvent('dvt_firstrow={1};dvt_startposition={}')" />;</xsl:attribute>
+												Start</a>
+												<xsl:text disable-output-escaping="yes" ddwrt:nbsp-preserve="yes">&amp;nbsp;</xsl:text>
+												<a>
+												<xsl:attribute name="href">javascript: history.back();</xsl:attribute>
+												<img src="/_layouts/images/prev.gif" border="0" alt="Previous" />
+												</a>
+												<xsl:text disable-output-escaping="yes" ddwrt:nbsp-preserve="yes">&amp;nbsp;</xsl:text>
+											</xsl:if>
+											<xsl:value-of select="$FirstRow" />
+											- <xsl:value-of select="$LastRowValue" />
+											<xsl:text xmlns:ddwrt="http://schemas.microsoft.com/WebParts/v2/DataView/runtime" ddwrt:nbsp-preserve="yes" disable-output-escaping="yes">&amp;nbsp;</xsl:text>
+											<xsl:if test="$LastRowValue &lt; $dvt_RowCount or string-length($dvt_nextpagedata)!=0" ddwrt:cf_ignore="1">
+												<a>
+												<xsl:attribute name="href">javascript: <xsl:value-of select="ddwrt:GenFireServerEvent(concat('dvt_firstrow={',$NextRow,'};dvt_startposition={',$dvt_nextpagedata,'}'))" />;</xsl:attribute>
+												<img src="/_layouts/images/next.gif" border="0" alt="Next" />
+												</a>
+											</xsl:if>
+										</td>
+									</xsl:template>
+									<xsl:template name="dvt_1.empty">
+										<xsl:variable name="dvt_ViewEmptyText">There are no items for this Study.</xsl:variable>
+										<table border="0" width="100%">
+											<tr>
+												<td class="ms-vb">
+													<xsl:value-of select="$dvt_ViewEmptyText" />
+												</td>
+											</tr>
+										</table>
+									</xsl:template>
+								</xsl:stylesheet>
+								
+							</Xsl>
+</WebPartPages:DataFormWebPart>
+
+</ZoneTemplate>

@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.0.js"></script>
+	<script type="text/javascript">
+	function xlsIE() {
+	var ExcelApp = new ActiveXObject("Excel.Application");
+	var ExcelSheet = new ActiveXObject("Excel.Sheet");
+	
+	ExcelSheet.Application.Visible = true;
+	
+	var columns = -1;
+	$('#export tr:nth-child(1) td').each(function () {
+		if ($(this).attr('colspan')) {
+			columns += +$(this).attr('colspan');
+		} else {
+			columns++;
+		}
+	});
+	
+	var i = 0;
+	var j = 0;
+	
+	$('#export tr').each(function (i) {
+		$(this).find('th,td').each(function (j) {
+			ExcelSheet.ActiveSheet.Cells(i + 1,j + 1).Value = $(this).text();
+		});
+	});
+	window.focus();
+}
+	</script>
+	<style type="text/css">
+
+	</style>
+	<title>Untitled</title>
+</head>
+<body>
+
+<div id="tableWrap">
+<table border="1" id="export">
+<tr><th>GSS#</th><th>Study Name</th><th>BU</th></tr>
+<tr><td>GSS93366</td><td>Study1</td><td>Rajput,Pavan</td></tr>
+<tr><td>GSS93377</td><td>Study2</td><td>Bolla.su</td></tr>
+<tr><td>GSS93388</td><td>Study3</td><td>Yeddula.ar</td></tr>
+<tr><td>GSS93399</td><td>Study4</td><td>Udaya.ui</td></tr>
+</table>
+</div>
+
+<button onclick="xlsIE()">Export to Excel</button>
+</body>
+</html>
