@@ -479,6 +479,7 @@ function getContents(strLibrary) {
 						if ($.inArray(grpName, groups) < 0) {
 
 							var grpSid = grpName.replace(/\//g, "");
+							
 							var grpIDArr = new Array();
 							grpIDArr = grpSid.split(' ');
 
@@ -486,6 +487,8 @@ function getContents(strLibrary) {
 							$.each(grpIDArr, function (i) {
 								grpNameId += grpIDArr[i];
 							});
+							
+							grpNameId=grpNameId.replace(/[()]/g,'');
 
 							var grphdr = "<table id=" + grpNameId + "><tr>";
 							grphdr += "<td valign=\"top\" style=\"padding: 20px 20px 5px 20px;\">";
@@ -516,6 +519,8 @@ function getContents(strLibrary) {
 						$.each(grpIDArr, function (i) {
 							grpNameId += grpIDArr[i];
 						});
+						
+						grpNameId=grpNameId.replace(/[()]/g,'');
 
 						$('#' + grpNameId).append(lin);
 					}

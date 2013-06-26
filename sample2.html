@@ -139,7 +139,7 @@
 										</tr>
 									</table>
 									
-								
+									
 									<table style="vertical-align:top;">
 										<tr id="trWelcome">
 											<td align="right" style="padding:0 20px 10px 0"  id="tdLoginID">
@@ -219,79 +219,224 @@
 			</td>
 		</tr>
 		<tr>
-	<td colspan='2'>
-		
-		<table border="0" cellpadding="0" cellspacing="0">
-			<tr>
-				<td valign="top" style="width:245px; padding:0 0 0 5px;">
-					
-					
-				</td>
-				<td  valign="top" style="padding:0 15px 0 10px;width:100%;height:500px">
-					<asp:ContentPlaceHolder id="PlaceHolderMain" runat="server">
-						
-					</asp:ContentPlaceHolder>
-				</td>
-			</tr>
-			</td>
-			<table>
-			
-			
-		</tr>		
-		<tr>
-			<td valign="top" class="footer">
-				<table width="650" border="0" align="center" cellpadding="0" cellspacing="0">
+			<td colspan='2'>
+				
+				<table border="0" cellpadding="0" cellspacing="0">
 					<tr>
-						<td>
-							<asp:LoginName ID="aspLoginName" runat="server"></asp:LoginName>
+						<td valign="top" style="width:245px; padding:0 0 0 5px;">
+							<div>
+								<div id="ops" style="margin-top:10px">
+									<!-- Display Left navigation menu
+									-->
+									<div>
+										
+										<table width="91%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td valign="top"><img src="../images1/administration_heading.jpg" width="245" height="37" /></td>
+											</tr>
+											<tr>
+												<td valign="top" class="leftnav_bg">
+													
+													<table width="218" border="0" cellspacing="0" cellpadding="0">           
+														<TR>
+														<TD style="PADDING-BOTTOM: 0px; PADDING-LEFT: 6px; PADDING-RIGHT: 0px; HEIGHT: 4px; PADDING-TOP: 0px" vAlign=top><IMG src="../images1/left_nav_div.png" width=220 height=4></TD></TR>
+														<TR>
+															<TD vAlign=top>
+																<A style="TEXT-DECORATION: none" href="javascript:loadRestrcitedPage();"><div id="divRestrict" style="width:99%">
+																Restricted Area</div></A>
+															</TD></TR>
+															<TR>
+															<TD style="PADDING-BOTTOM: 0px; PADDING-LEFT: 6px; PADDING-RIGHT: 0px; HEIGHT: 4px; PADDING-TOP: 0px" vAlign=top><IMG src="../images1/left_nav_div.png" width=220 height=4></TD></TR>
+															<TR>
+																<TD vAlign=top>
+																	<A style="TEXT-DECORATION: none" href="javascript:loadPrinciples();"><div style="width:99%">
+																	Guidelines and Principles</div></A>
+																</TD></TR>
+																<TR>
+																<TD style="PADDING-BOTTOM: 0px; PADDING-LEFT: 6px; PADDING-RIGHT: 0px; HEIGHT: 4px; PADDING-TOP: 0px" vAlign=top><IMG src="../images1/left_nav_div.png" width=220 height=4></TD></TR>
+																<TR>
+																	<TD vAlign=top>
+																		<A style="TEXT-DECORATION: none" href="javascript:loadPre();"><div style="width:99%">
+																		Presentations</div></A>
+																	</TD></TR>
+																	
+																	<TR>
+																	<TD style="PADDING-BOTTOM: 0px; PADDING-LEFT: 6px; PADDING-RIGHT: 0px; HEIGHT: 4px; PADDING-TOP: 0px" vAlign=top><IMG src="../images1/left_nav_div.png" width=220 height=4></TD></TR>
+																	<TR>
+																		<TD vAlign=top>
+																			<A style="TEXT-DECORATION: none" href="javascript:loadGraveyard();"><div style="width:99%">
+																			Graveyard Documents</div></A>
+																		</TD></TR>
+																		
+													</table>
+												</td>
+											</tr>
+											
+											<tr>
+												<td valign="top" class="leftnav_btmbg">&nbsp;</td>
+											</tr>
+										</table>
+										
+									</div>
+									
+									<div id="divSuperAdmin">
+										<table width="91%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td valign="top"><img src="../images1/maintain_doc_heading.jpg" width="245" height="37" /></td>
+											</tr>
+											<tr>
+												<td valign="top" class="leftnav_bg">
+													
+													<table width="218" border="0" cellspacing="0" cellpadding="0">           
+														<TR>
+														<TD style="PADDING-BOTTOM: 0px; PADDING-LEFT: 6px; PADDING-RIGHT: 0px; HEIGHT: 4px; PADDING-TOP: 0px; width: 226px;" vAlign=top><IMG src="../images1/left_nav_div.png" width=220 height=4></TD></TR>
+														<TR>
+															<TD vAlign=top style="width: 226px">
+																<A style="TEXT-DECORATION: none" href="javascript:openCategories();"><div style="width:99%;">
+																Create Standard Topic</div></A>
+															</TD></TR>
+															<TR>
+															<TD style="PADDING-BOTTOM: 0px; PADDING-LEFT: 6px; PADDING-RIGHT: 0px; HEIGHT: 4px; PADDING-TOP: 0px; width: 226px;" vAlign=top><IMG src="../images1/left_nav_div.png" width=220 height=4></TD></TR>
+															<TR>
+																<TD vAlign=top style="width: 226px;">
+																	<A style="TEXT-DECORATION: none" href="javascript:UploadDocumenttoCategory();"><div style="width:99%">
+																	Upload Home &amp; Standard Documents</div></A>
+																</TD></TR>
+																<TR>
+																	<TD style="PADDING-BOTTOM: 0px; PADDING-LEFT: 6px; PADDING-RIGHT: 0px; HEIGHT: 4px; PADDING-TOP: 0px; width: 226px;" vAlign=top><IMG src="../images1/left_nav_div.png" width=220 height=4></TD>
+																</TR>
+																
+																<TR>
+																	<TD style="PADDING-BOTTOM: 0px; PADDING-LEFT: 6px; PADDING-RIGHT: 0px; HEIGHT: 4px; PADDING-TOP: 0px; width: 226px;" vAlign=top><IMG src="../images1/left_nav_div.png" width=220 height=4></TD>
+																</TR>
+																<TR>
+																	<TD vAlign=top style="width: 226px">
+																		<A style="TEXT-DECORATION: none" href="javascript:UploadRestrictedArea();"><div style="width:99%">
+																		Upload Restricted Area</div></A>
+																	</TD></TR>
+																	
+																	<TR>
+																	<TD style="PADDING-BOTTOM: 0px; PADDING-LEFT: 6px; PADDING-RIGHT: 0px; HEIGHT: 4px; PADDING-TOP: 0px; width: 226px;" vAlign=top><IMG src="../images1/left_nav_div.png" width=220 height=4></TD></TR>
+																	
+																	<TR>
+																		<TD vAlign=top style="width: 226px">
+																			<A style="TEXT-DECORATION: none" href="javascript:NextLeagalOrientation();"><div style="width:99%">
+																			Create Next Legal Orientation</div></A>
+																		</TD></TR>
+																		
+																		<TR>
+																		<TD style="PADDING-BOTTOM: 0px; PADDING-LEFT: 6px; PADDING-RIGHT: 0px; HEIGHT: 4px; PADDING-TOP: 0px; width: 226px;" vAlign=top><IMG src="../images1/left_nav_div.png" width=220 height=4></TD></TR>
+																		
+																		
+																		<TR>
+																			<TD vAlign=top style="width: 226px">
+																				<A style="TEXT-DECORATION: none" href="javascript:loadGuidelines();"><div style="width:99%">
+																				Create Guidelines &amp; Principles Topic</div></A>
+																			</TD></TR>
+																			<TR>
+																			<TD style="PADDING-BOTTOM: 0px; PADDING-LEFT: 6px; PADDING-RIGHT: 0px; HEIGHT: 4px; PADDING-TOP: 0px; width: 226px;" vAlign=top><IMG src="../images1/left_nav_div.png" width=220 height=4></TD></TR>
+																			<TR>
+																				<TD vAlign=top style="width: 226px">
+																					<A style="TEXT-DECORATION: none" href="javascript:UploadGuidelinePrinciple();"><div style="width:99%">
+																					Upload Guideline &amp; Principle</div></A>
+																				</TD></TR>
+																				
+																				<TR>
+																				<TD style="PADDING-BOTTOM: 0px; PADDING-LEFT: 6px; PADDING-RIGHT: 0px; HEIGHT: 4px; PADDING-TOP: 0px; width: 226px;" vAlign=top><IMG src="../images1/left_nav_div.png" width=220 height=4></TD></TR>
+																				<TR>
+																					<TD vAlign=top style="width: 226px">
+																						<A style="TEXT-DECORATION: none" href="javascript:UploadGuidelinePresentation();"><div style="width:99%">
+																						Upload Presentation</div></A>
+																					</TD></TR>
+																					
+																					<TR>
+																					<TD style="PADDING-BOTTOM: 0px; PADDING-LEFT: 6px; PADDING-RIGHT: 0px; HEIGHT: 4px; PADDING-TOP: 0px; width: 226px;" vAlign=top><IMG src="../images1/left_nav_div.png" width=220 height=4></TD></TR>
+																					
+																					<TR>
+																						<TD vAlign=top style="width: 226px">
+																							<A style="TEXT-DECORATION: none" href="javascript:CreateHomeLinksTitle();"><div style="width:99%">
+																							HomeLinks Title</div></A>
+																						</TD>
+																					</TR>
+													</table>
+												</td>
+											</tr>
+											
+											<tr>
+												<td valign="top" class="leftnav_btmbg">&nbsp;</td>
+											</tr>
+										</table>
+									</div>
+									
+								</div>
+							</div>
+							
 						</td>
-						<td>
+						<td  valign="top" style="padding:0 15px 0 10px;width:100%;height:500px">
+							<asp:ContentPlaceHolder id="PlaceHolderMain" runat="server">
+								
+							</asp:ContentPlaceHolder>
 						</td>
-						<td style="width: 58px;"><a id="adminLink">
-							<img id="imgLogo" src="http://teamspace.pg.com/sites/cppdpolicy/Images1/footer_logo.jpg" width="48" height="50" border="0" />
-						</a></td>
-						<td class="footer">If you have questions about this web site 
-							contact Trenda Pollard@513-983-5162 or
-						<a href="mailto:pollard.ts@pg.com">pollard.ts@pg.com</a> </td>
 					</tr>
-				</table>
-			</td>
-		</tr>
-	</table>
-</form>
-<script type="text/javascript">
+				</td>
+				<table>
+					
+					
+				</tr>		
+				<tr>
+					<td valign="top" class="footer">
+						<table width="650" border="0" align="center" cellpadding="0" cellspacing="0">
+							<tr>
+								<td>
+									<asp:LoginName ID="aspLoginName" runat="server"></asp:LoginName>
+								</td>
+								<td>
+								</td>
+								<td style="width: 58px;"><a id="adminLink">
+									<img id="imgLogo" src="http://teamspace.pg.com/sites/cppdpolicy/Images1/footer_logo.jpg" width="48" height="50" border="0" />
+								</a></td>
+								<td class="footer">If you have questions about this web site 
+									contact Trenda Pollard@513-983-5162 or
+								<a href="mailto:pollard.ts@pg.com">pollard.ts@pg.com</a> </td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</form>
+		<script type="text/javascript">
+			
+			
+			function HideAdvSearch()
+			{
+				document.getElementById('ctl00_ctl06_SF596B248_AdvSearchLink').style.display="none";
+			}
+			
+			//debugger
+			if(document.getElementById("zz6_Menu"))
+			{
+				document.getElementById("tdLoginID").innerText=document.getElementById("zz6_Menu").innerText;
+			}
+			else if(document.getElementById("zz8_Menu"))
+			{
+				document.getElementById("tdLoginID").innerText=document.getElementById("zz8_Menu").innerText;
+			}
+			else if(document.getElementById("zz9_Menu"))
+			{
+				document.getElementById("tdLoginID").innerText=document.getElementById("zz9_Menu").innerText;
+			}
+			else if(document.getElementById("zz12_Menu"))
+			{
+				document.getElementById("tdLoginID").innerText=document.getElementById("zz12_Menu").innerText;
+			}
+			else if(document.getElementById("zz24_Menu"))
+			{
+				document.getElementById("tdLoginID").innerText=document.getElementById("zz24_Menu").innerText;
+			}
+			
+		</script>
 		
-	
-	function HideAdvSearch()
-	{
-		document.getElementById('ctl00_ctl06_SF596B248_AdvSearchLink').style.display="none";
-	}
-	
-	//debugger
-	if(document.getElementById("zz6_Menu"))
-	{
-		document.getElementById("tdLoginID").innerText=document.getElementById("zz6_Menu").innerText;
-	}
-	else if(document.getElementById("zz8_Menu"))
-	{
-		document.getElementById("tdLoginID").innerText=document.getElementById("zz8_Menu").innerText;
-	}
-	else if(document.getElementById("zz9_Menu"))
-	{
-		document.getElementById("tdLoginID").innerText=document.getElementById("zz9_Menu").innerText;
-	}
-	else if(document.getElementById("zz12_Menu"))
-	{
-		document.getElementById("tdLoginID").innerText=document.getElementById("zz12_Menu").innerText;
-	}
-	else if(document.getElementById("zz24_Menu"))
-	{
-		document.getElementById("tdLoginID").innerText=document.getElementById("zz24_Menu").innerText;
-	}
-	
-</script>
-
-<script type="text/javascript">getUserName();</script>
-
-</body>
+		<script type="text/javascript">getUserName();</script>
+		
+	</body>
 </html>
