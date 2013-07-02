@@ -130,20 +130,29 @@ function getData(title) {
 					var purchasingProcess = $(this).attr("ows_PurchasingProcess");
 					if (purchasingProcess == "" || purchasingProcess == 'undefined' || purchasingProcess == null)
 						purchasingProcess = "";
+					
 					var specAvailableDate = $(this).attr("ows_SpecificationAvailableDate");
+					
 					if (specAvailableDate == "" || specAvailableDate == 'undefined' || specAvailableDate == null)
 						specAvailableDate = "";
 					else
-						specAvailableDate = reformDate(specAvailableDate)
-							var comments = $(this).attr("ows_Notes");
+						specAvailableDate = reformDate(specAvailableDate);
+					
+					var comments = $(this).attr("ows_Notes");
 					if (comments == "" || comments == 'undefined' || comments == null)
 						comments = "";
+						
+						
+						var sourceTime = $(this).attr("ows_SourcingTiming");
+					if (sourceTime == "" || sourceTime == 'undefined' || sourceTime == null)
+						sourceTime = "";
 
 					poolTable += '<tr>';
 					poolTable += '<td  class="ms-vb2"><label id="lblSpPool' + i + '">' + spendingPool + '</label></td>';
 					poolTable += '<td class="ms-vb2"><label id="lblmaterialCode' + i + '">' + materialCode + '</label></td>';
 					poolTable += '<td class="ms-vb2"><label id="lblbspo' + i + '">' + buyerSpendPoolOwner + '</label></td>';
 					poolTable += '<td class="ms-vb2"><label id="lblestimated' + i + '">' + estimatedSpend + '</label></td>';
+					poolTable += '<td class="ms-vb2"><label id="lblestimated' + i + '">' + reformDate(sourceTime) + '</label></td>';
 					poolTable += '<td class="ms-vb2">';
 					poolTable += buildSelectBox(status, i);
 					poolTable += '<label id="lblStatus' + i + '">' + status + '</label></td>';
