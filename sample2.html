@@ -1,15 +1,43 @@
-<%@ Master Language="C#" %>
-<%@ Register tagprefix="WebPartPages" namespace="Microsoft.SharePoint.WebPartPages" assembly="Microsoft.SharePoint, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
-<%@ Register tagprefix="SharePoint" namespace="Microsoft.SharePoint.WebControls" assembly="Microsoft.SharePoint, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
+<%@Master language="C#"%>
+<%@ Register Tagprefix="SharePoint" Namespace="Microsoft.SharePoint.WebControls" Assembly="Microsoft.SharePoint, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %> <%@ Register Tagprefix="Utilities" Namespace="Microsoft.SharePoint.Utilities" Assembly="Microsoft.SharePoint, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %> <%@ Import Namespace="Microsoft.SharePoint" %>
+<%@ Import Namespace="Microsoft.SharePoint.ApplicationPages" %>
+<%@ Register Tagprefix="WebPartPages" Namespace="Microsoft.SharePoint.WebPartPages" Assembly="Microsoft.SharePoint, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 <%@ Register TagPrefix="wssuc" TagName="Welcome" src="~/_controltemplates/Welcome.ascx" %>
-
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
-<html dir="ltr">
+<%@ Register TagPrefix="wssuc" TagName="DesignModeConsole" src="~/_controltemplates/DesignModeConsole.ascx" %>
+<HTML dir="<%$Resources:wss,multipages_direction_dir_value%>" runat="server" xmlns:o="urn:schemas-microsoft-com:office:office" __expr-val-dir="ltr">
 	
 	<head runat="server">
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-		<SharePoint:RobotsMetaTag runat="server"></SharePoint:RobotsMetaTag>
 		
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<META Name="GENERATOR" Content="Microsoft SharePoint">
+		<META Name="progid" Content="SharePoint.WebPartPage.Document">
+		<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+		<META HTTP-EQUIV="Expires" content="0">
+		<SharePoint:RobotsMetaTag runat="server"/>
+		<Title ID=onetidTitle><asp:ContentPlaceHolder id=PlaceHolderPageTitle runat="server"/></Title>
+		<SharePoint:CssLink runat="server"/>
+		<SharePoint:Theme runat="server"/>
+		<SharePoint:ScriptLink language="javascript" name="core.js" Defer="true" runat="server"/>
+		<SharePoint:CustomJSUrl runat="server"/>
+		<SharePoint:SoapDiscoveryLink runat="server"/>
+		<asp:ContentPlaceHolder id="PlaceHolderAdditionalPageHead" runat="server"/>
+		<SharePoint:DelegateControl runat="server" ControlId="AdditionalPageHead" AllowMultipleControls="true"/>
+		<style type="text/css">
+			#msgbox { 
+			font-weight: bold
+			}
+			.ms-sitetitle2
+			{
+			font:11pt verdana;
+			font-weight:bold;
+			color:#666666;
+			padding:4px 0px 7px 6px;
+			vertical-align:middle;
+			margin:0;
+			}
+		</style>
+
+		<SharePoint:RobotsMetaTag runat="server"></SharePoint:RobotsMetaTag>		
 		<SharePoint:CssLink runat="server"/>
 		<link rel="stylesheet" type="text/css" href="http://teamspace.pg.com/sites/cppdpolicy/WPPages/CSS/style.css"/>
 		<asp:ContentPlaceHolder id="head" runat="server">
@@ -17,7 +45,6 @@
 		
 		<style type="text/css">
 			.ms-siteactionsmenu div div div{
-			/*background-image:url("/_layouts/http://teamspace.pg.com/sites/srm/WPPages/http://teamspace.pg.com/sites/srm/WPPages/Images/siteactionsmenugrad.gif");*/
 			background-image:url("http://teamspace.pg.com/sites/cppdpolicy/Images1/header_bg_rep.jpg");
 			background-repeat:repeat-x;
 			border-top:1px solid #fd9146;
@@ -27,7 +54,7 @@
 			padding:1px 4px 3px 10px;
 			}
 		</style>
-		
+
 		<script language="javascript" type="text/javascript" src="http://teamspace.pg.com/sites/cppdpolicy/WPPages/JS/jquery-1.8.3.min.js"></script>
 		<script language="javascript" type="text/javascript" src="http://teamspace.pg.com/sites/cppdpolicy/WPPages/JS/jquery.SPServices-0.7.2.min.js"></script>
 		<script language="javascript" type="text/javascript" src="http://teamspace.pg.com/sites/cppdpolicy/WPPages/JS/SPAPI_UserGroup.js"></script>
@@ -40,7 +67,7 @@
 		<script type = "text/javascript" >
 			$(document).ready(function () {
 				// Code for the menu background color
-				$('.leftnav_bg tbody tr td div').click(function () {
+					$('.leftnav_bg tbody tr td div').click(function () {
 					$('.leftnav_bg tbody tr td div').removeClass("selected");
 					$(this).addClass("selected");	
 				});
@@ -56,8 +83,6 @@
 			});
 			
 			function fcFilterAsYouType(strText){
-				//alert(strText.toLowerCase());
-				//$('.ms-listviewtable tr:not(".ms-viewheadertr, .ms-vh2 tr, .ms-vh-icon tr")').each(function(){
 				$('#divContents tr').each(function(){
 					sourceHTML = $(this).text();
 					sourceHTML = sourceHTML.toLowerCase();
@@ -105,7 +130,8 @@
 		
 		
 	</head>
-	<body onload="javascript:HideAdvSearch();">
+	
+	<BODY scroll="yes" onload="javascript:if (typeof(_spBodyOnLoadWrapper) != 'undefined') _spBodyOnLoadWrapper();">
 		<form id="form1" runat="server">
 			<WebPartPages:SPWebPartManager runat="server" id="WebPartManager"></WebPartPages:SPWebPartManager>
 			<table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -115,12 +141,10 @@
 							<tr>
 								<td valign="top" style="width: 133px;"><a title="CPPD Home" href="http://teamspace.pg.com/sites/cppdpolicy/default.aspx">
 								<img alt="CPPD Home" src="http://teamspace.pg.com/sites/cppdpolicy/Images1/cppd_logo.jpg" width="133" height="114" border="0" /></a></td>
-								<td valign="top" style="background: url(http://teamspace.pg.com/sites/cppdpolicy/Images1/header_bg.jpg) no-repeat; padding: 35px 0 0 0;">
+								<td valign="top" style="background: url(http://teamspace.pg.com/sites/cppdpolicy/Images1/header_bg.jpg) no-repeat; padding: 35px 0 0 0; width: 318px;">
 									<table  border="0" align="right" cellpadding="0" cellspacing="0">
 										<tr>
 											<td valign="top" class="header_caps">Customer Practices &amp; Policy</td>
-											<!--<td valign="top" class="header_caps">customer promotion 
-											&amp; policy development</td>-->
 										</tr>
 										<tr>
 											<td valign="top" class="header_small">Call Early, Call 
@@ -143,14 +167,19 @@
 									<table style="vertical-align:top;">
 										<tr id="trWelcome">
 											<td align="right" style="padding:0 20px 10px 0"  id="tdLoginID">
-												<wssuc:Welcome id="IdWelcome" runat="server" EnableViewState="false">
-												</wssuc:Welcome>
+												<div style="width:200px;float:right">
+													<wssuc:Welcome id="IdWelcome" runat="server" EnableViewState="false">
+													</wssuc:Welcome>
+												</div>
 											</td>
 										</tr>
 										
 										<tr id="trSearch" align="right">
 											<td align="right">
-											<SharePoint:DelegateControl runat="server" ControlId="SmallSearchInputBox"/></td>
+												<asp:ContentPlaceHolder id="PlaceHolderSearchArea" runat="server">
+													<SharePoint:DelegateControl runat="server" ControlId="SmallSearchInputBox"/>
+												</asp:ContentPlaceHolder>
+											</td>
 										</tr>
 										
 										
@@ -159,7 +188,7 @@
 												<table>
 													<tr>
 														<td>
-														<a title="Sign Out" style="text-decoration:none;color:black;font-weight:normal;padding-right:15px" href="http://teamspace.pg.com/sites/cppdpolicy/_layouts/signout.aspx">Sign Out</a></td>
+														</td>
 														<td valign="bottom">
 															<div class="ms-siteactionsmenu" id="siteactiontd" style="float:right">
 																<SharePoint:SiteActions runat="server" AccessKey="<%$Resources:wss,tb_SiteActions_AK%>" id="SiteActionsMenuMain"
@@ -232,28 +261,28 @@
 										
 										<table width="91%" border="0" cellspacing="0" cellpadding="0">
 											<tr>
-												<td valign="top"><img src="../images1/administration_heading.jpg" width="245" height="37" /></td>
+												<td valign="top"><img src="http://teamspace.pg.com/sites/cppdpolicy/images1/administration_heading.jpg" width="245" height="37" /></td>
 											</tr>
 											<tr>
 												<td valign="top" class="leftnav_bg">
 													
 													<table width="218" border="0" cellspacing="0" cellpadding="0">           
 														<TR>
-														<TD style="PADDING-BOTTOM: 0px; PADDING-LEFT: 6px; PADDING-RIGHT: 0px; HEIGHT: 4px; PADDING-TOP: 0px" vAlign=top><IMG src="../images1/left_nav_div.png" width=220 height=4></TD></TR>
+														<TD style="PADDING-BOTTOM: 0px; PADDING-LEFT: 6px; PADDING-RIGHT: 0px; HEIGHT: 4px; PADDING-TOP: 0px" vAlign=top><IMG src="http://teamspace.pg.com/sites/cppdpolicy/images1/left_nav_div.png" width=220 height=4></TD></TR>
 														<TR>
 															<TD vAlign=top>
 																<A style="TEXT-DECORATION: none" href="javascript:loadRestrcitedPage();"><div id="divRestrict" style="width:99%">
 																Restricted Area</div></A>
 															</TD></TR>
 															<TR>
-															<TD style="PADDING-BOTTOM: 0px; PADDING-LEFT: 6px; PADDING-RIGHT: 0px; HEIGHT: 4px; PADDING-TOP: 0px" vAlign=top><IMG src="../images1/left_nav_div.png" width=220 height=4></TD></TR>
+															<TD style="PADDING-BOTTOM: 0px; PADDING-LEFT: 6px; PADDING-RIGHT: 0px; HEIGHT: 4px; PADDING-TOP: 0px" vAlign=top><IMG src="http://teamspace.pg.com/sites/cppdpolicy/images1/left_nav_div.png" width=220 height=4></TD></TR>
 															<TR>
 																<TD vAlign=top>
 																	<A style="TEXT-DECORATION: none" href="javascript:loadPrinciples();"><div style="width:99%">
 																	Guidelines and Principles</div></A>
 																</TD></TR>
 																<TR>
-																<TD style="PADDING-BOTTOM: 0px; PADDING-LEFT: 6px; PADDING-RIGHT: 0px; HEIGHT: 4px; PADDING-TOP: 0px" vAlign=top><IMG src="../images1/left_nav_div.png" width=220 height=4></TD></TR>
+																<TD style="PADDING-BOTTOM: 0px; PADDING-LEFT: 6px; PADDING-RIGHT: 0px; HEIGHT: 4px; PADDING-TOP: 0px" vAlign=top><IMG src="http://teamspace.pg.com/sites/cppdpolicy/images1/left_nav_div.png" width=220 height=4></TD></TR>
 																<TR>
 																	<TD vAlign=top>
 																		<A style="TEXT-DECORATION: none" href="javascript:loadPre();"><div style="width:99%">
@@ -261,10 +290,10 @@
 																	</TD></TR>
 																	
 																	<TR>
-																	<TD style="PADDING-BOTTOM: 0px; PADDING-LEFT: 6px; PADDING-RIGHT: 0px; HEIGHT: 4px; PADDING-TOP: 0px" vAlign=top><IMG src="../images1/left_nav_div.png" width=220 height=4></TD></TR>
+																	<TD style="PADDING-BOTTOM: 0px; PADDING-LEFT: 6px; PADDING-RIGHT: 0px; HEIGHT: 4px; PADDING-TOP: 0px" vAlign=top><IMG src="http://teamspace.pg.com/sites/cppdpolicy/images1/left_nav_div.png" width=220 height=4></TD></TR>
 																	<TR>
 																		<TD vAlign=top>
-																			<A style="TEXT-DECORATION: none" href="javascript:loadGraveyard();"><div style="width:99%">
+																			<A style="TEXT-DECORATION: none" href="http://teamspace.pg.com/sites/cppdpolicy/WPPages/GraveYard.aspx"><div style="width:99%">
 																			Graveyard Documents</div></A>
 																		</TD></TR>
 																		
@@ -282,32 +311,32 @@
 									<div id="divSuperAdmin">
 										<table width="91%" border="0" cellspacing="0" cellpadding="0">
 											<tr>
-												<td valign="top"><img src="../images1/maintain_doc_heading.jpg" width="245" height="37" /></td>
+												<td valign="top"><img src="http://teamspace.pg.com/sites/cppdpolicy/images1/maintain_doc_heading.jpg" width="245" height="37" /></td>
 											</tr>
 											<tr>
 												<td valign="top" class="leftnav_bg">
 													
 													<table width="218" border="0" cellspacing="0" cellpadding="0">           
 														<TR>
-														<TD style="PADDING-BOTTOM: 0px; PADDING-LEFT: 6px; PADDING-RIGHT: 0px; HEIGHT: 4px; PADDING-TOP: 0px; width: 226px;" vAlign=top><IMG src="../images1/left_nav_div.png" width=220 height=4></TD></TR>
+														<TD style="PADDING-BOTTOM: 0px; PADDING-LEFT: 6px; PADDING-RIGHT: 0px; HEIGHT: 4px; PADDING-TOP: 0px; width: 226px;" vAlign=top><IMG src="http://teamspace.pg.com/sites/cppdpolicy/images1/left_nav_div.png" width=220 height=4></TD></TR>
 														<TR>
 															<TD vAlign=top style="width: 226px">
 																<A style="TEXT-DECORATION: none" href="javascript:openCategories();"><div style="width:99%;">
 																Create Standard Topic</div></A>
 															</TD></TR>
 															<TR>
-															<TD style="PADDING-BOTTOM: 0px; PADDING-LEFT: 6px; PADDING-RIGHT: 0px; HEIGHT: 4px; PADDING-TOP: 0px; width: 226px;" vAlign=top><IMG src="../images1/left_nav_div.png" width=220 height=4></TD></TR>
+															<TD style="PADDING-BOTTOM: 0px; PADDING-LEFT: 6px; PADDING-RIGHT: 0px; HEIGHT: 4px; PADDING-TOP: 0px; width: 226px;" vAlign=top><IMG src="http://teamspace.pg.com/sites/cppdpolicy/images1/left_nav_div.png" width=220 height=4></TD></TR>
 															<TR>
 																<TD vAlign=top style="width: 226px;">
 																	<A style="TEXT-DECORATION: none" href="javascript:UploadDocumenttoCategory();"><div style="width:99%">
 																	Upload Home &amp; Standard Documents</div></A>
 																</TD></TR>
 																<TR>
-																	<TD style="PADDING-BOTTOM: 0px; PADDING-LEFT: 6px; PADDING-RIGHT: 0px; HEIGHT: 4px; PADDING-TOP: 0px; width: 226px;" vAlign=top><IMG src="../images1/left_nav_div.png" width=220 height=4></TD>
+																	<TD style="PADDING-BOTTOM: 0px; PADDING-LEFT: 6px; PADDING-RIGHT: 0px; HEIGHT: 4px; PADDING-TOP: 0px; width: 226px;" vAlign=top><IMG src="http://teamspace.pg.com/sites/cppdpolicy/images1/left_nav_div.png" width=220 height=4></TD>
 																</TR>
 																
 																<TR>
-																	<TD style="PADDING-BOTTOM: 0px; PADDING-LEFT: 6px; PADDING-RIGHT: 0px; HEIGHT: 4px; PADDING-TOP: 0px; width: 226px;" vAlign=top><IMG src="../images1/left_nav_div.png" width=220 height=4></TD>
+																	<TD style="PADDING-BOTTOM: 0px; PADDING-LEFT: 6px; PADDING-RIGHT: 0px; HEIGHT: 4px; PADDING-TOP: 0px; width: 226px;" vAlign=top><IMG src="http://teamspace.pg.com/sites/cppdpolicy/images1/left_nav_div.png" width=220 height=4></TD>
 																</TR>
 																<TR>
 																	<TD vAlign=top style="width: 226px">
@@ -316,7 +345,7 @@
 																	</TD></TR>
 																	
 																	<TR>
-																	<TD style="PADDING-BOTTOM: 0px; PADDING-LEFT: 6px; PADDING-RIGHT: 0px; HEIGHT: 4px; PADDING-TOP: 0px; width: 226px;" vAlign=top><IMG src="../images1/left_nav_div.png" width=220 height=4></TD></TR>
+																	<TD style="PADDING-BOTTOM: 0px; PADDING-LEFT: 6px; PADDING-RIGHT: 0px; HEIGHT: 4px; PADDING-TOP: 0px; width: 226px;" vAlign=top><IMG src="http://teamspace.pg.com/sites/cppdpolicy/images1/left_nav_div.png" width=220 height=4></TD></TR>
 																	
 																	<TR>
 																		<TD vAlign=top style="width: 226px">
@@ -325,7 +354,7 @@
 																		</TD></TR>
 																		
 																		<TR>
-																		<TD style="PADDING-BOTTOM: 0px; PADDING-LEFT: 6px; PADDING-RIGHT: 0px; HEIGHT: 4px; PADDING-TOP: 0px; width: 226px;" vAlign=top><IMG src="../images1/left_nav_div.png" width=220 height=4></TD></TR>
+																		<TD style="PADDING-BOTTOM: 0px; PADDING-LEFT: 6px; PADDING-RIGHT: 0px; HEIGHT: 4px; PADDING-TOP: 0px; width: 226px;" vAlign=top><IMG src="http://teamspace.pg.com/sites/cppdpolicy/images1/left_nav_div.png" width=220 height=4></TD></TR>
 																		
 																		
 																		<TR>
@@ -334,7 +363,7 @@
 																				Create Guidelines &amp; Principles Topic</div></A>
 																			</TD></TR>
 																			<TR>
-																			<TD style="PADDING-BOTTOM: 0px; PADDING-LEFT: 6px; PADDING-RIGHT: 0px; HEIGHT: 4px; PADDING-TOP: 0px; width: 226px;" vAlign=top><IMG src="../images1/left_nav_div.png" width=220 height=4></TD></TR>
+																			<TD style="PADDING-BOTTOM: 0px; PADDING-LEFT: 6px; PADDING-RIGHT: 0px; HEIGHT: 4px; PADDING-TOP: 0px; width: 226px;" vAlign=top><IMG src="http://teamspace.pg.com/sites/cppdpolicy/images1/left_nav_div.png" width=220 height=4></TD></TR>
 																			<TR>
 																				<TD vAlign=top style="width: 226px">
 																					<A style="TEXT-DECORATION: none" href="javascript:UploadGuidelinePrinciple();"><div style="width:99%">
@@ -342,7 +371,7 @@
 																				</TD></TR>
 																				
 																				<TR>
-																				<TD style="PADDING-BOTTOM: 0px; PADDING-LEFT: 6px; PADDING-RIGHT: 0px; HEIGHT: 4px; PADDING-TOP: 0px; width: 226px;" vAlign=top><IMG src="../images1/left_nav_div.png" width=220 height=4></TD></TR>
+																				<TD style="PADDING-BOTTOM: 0px; PADDING-LEFT: 6px; PADDING-RIGHT: 0px; HEIGHT: 4px; PADDING-TOP: 0px; width: 226px;" vAlign=top><IMG src="http://teamspace.pg.com/sites/cppdpolicy/images1/left_nav_div.png" width=220 height=4></TD></TR>
 																				<TR>
 																					<TD vAlign=top style="width: 226px">
 																						<A style="TEXT-DECORATION: none" href="javascript:UploadGuidelinePresentation();"><div style="width:99%">
@@ -350,12 +379,12 @@
 																					</TD></TR>
 																					
 																					<TR>
-																					<TD style="PADDING-BOTTOM: 0px; PADDING-LEFT: 6px; PADDING-RIGHT: 0px; HEIGHT: 4px; PADDING-TOP: 0px; width: 226px;" vAlign=top><IMG src="../images1/left_nav_div.png" width=220 height=4></TD></TR>
+																					<TD style="PADDING-BOTTOM: 0px; PADDING-LEFT: 6px; PADDING-RIGHT: 0px; HEIGHT: 4px; PADDING-TOP: 0px; width: 226px;" vAlign=top><IMG src="http://teamspace.pg.com/sites/cppdpolicy/images1/left_nav_div.png" width=220 height=4></TD></TR>
 																					
 																					<TR>
 																						<TD vAlign=top style="width: 226px">
 																							<A style="TEXT-DECORATION: none" href="javascript:CreateHomeLinksTitle();"><div style="width:99%">
-																							HomeLinks Title</div></A>
+																							Home Links Title</div></A>
 																						</TD>
 																					</TR>
 													</table>
@@ -373,70 +402,147 @@
 							
 						</td>
 						<td  valign="top" style="padding:0 15px 0 10px;width:100%;height:500px">
+							<table id="onetidPageTitleAreaTable" cellpadding=0 cellspacing=0 width=100% border="0">
+								<tr>
+									<td rowspan="2" width="30px">
+										<asp:ContentPlaceHolder id="PlaceHolderPageImage" runat="server"/> 
+									</td>
+									<td>
+										<table style="margin-top: 10px;" border="0" cellspacing="0" cellpadding="0">
+											<tbody><tr>
+												<td valign="top" style="height: 37px;"><img width="8" height="37" src="http://teamspace.pg.com/sites/cppdpolicy/images1/gray_heading_lft.jpg"></td>
+												<td class="body_heading" valign="top" style="height: 37px;">
+													<div id="headersec">			
+														
+														<asp:ContentPlaceHolder id="PlaceHolderPageTitleInTitleArea" runat="server" />
+														
+													</div> 
+												</td>
+												<td valign="top" style="height: 37px;"><img width="8" height="37" src="http://teamspace.pg.com/sites/cppdpolicy/images1/gray_heading_rt.jpg"></td>
+											</tr>
+											</tbody></table>
+											<div style="font-size:11px;">
+												<asp:ContentPlaceHolder id="PlaceHolderPageDescription" runat="server"/>
+											</div>
+									</td>
+								</tr>
+								<tr>
+									
+									<td valign="top" class="ms-titlearea">
+										<asp:ContentPlaceHolder id="PlaceHolderTitleBreadcrumb" runat="server">
+											<asp:SiteMapPath SiteMapProvider="SPContentMapProvider" id="ContentMap" SkipLinkText="" NodeStyle-CssClass="ms-sitemapdirectional" runat="server"/> &nbsp;
+										</asp:ContentPlaceHolder>
+									</td></tr>
+							</table>
+							
 							<asp:ContentPlaceHolder id="PlaceHolderMain" runat="server">
 								
 							</asp:ContentPlaceHolder>
 						</td>
 					</tr>
-				</td>
-				<table>
-					
-					
-				</tr>		
-				<tr>
-					<td valign="top" class="footer">
-						<table width="650" border="0" align="center" cellpadding="0" cellspacing="0">
-							<tr>
-								<td>
-									<asp:LoginName ID="aspLoginName" runat="server"></asp:LoginName>
-								</td>
-								<td>
-								</td>
-								<td style="width: 58px;"><a id="adminLink">
-									<img id="imgLogo" src="http://teamspace.pg.com/sites/cppdpolicy/Images1/footer_logo.jpg" width="48" height="50" border="0" />
-								</a></td>
-								<td class="footer">If you have questions about this web site 
-									contact Trenda Pollard@513-983-5162 or
-								<a href="mailto:pollard.ts@pg.com">pollard.ts@pg.com</a> </td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-			</table>
-		</form>
-		<script type="text/javascript">
+				</table>
+			</td>
 			
-			
-			function HideAdvSearch()
-			{
-				document.getElementById('ctl00_ctl06_SF596B248_AdvSearchLink').style.display="none";
-			}
-			
-			//debugger
-			if(document.getElementById("zz6_Menu"))
-			{
-				document.getElementById("tdLoginID").innerText=document.getElementById("zz6_Menu").innerText;
-			}
-			else if(document.getElementById("zz8_Menu"))
-			{
-				document.getElementById("tdLoginID").innerText=document.getElementById("zz8_Menu").innerText;
-			}
-			else if(document.getElementById("zz9_Menu"))
-			{
-				document.getElementById("tdLoginID").innerText=document.getElementById("zz9_Menu").innerText;
-			}
-			else if(document.getElementById("zz12_Menu"))
-			{
-				document.getElementById("tdLoginID").innerText=document.getElementById("zz12_Menu").innerText;
-			}
-			else if(document.getElementById("zz24_Menu"))
-			{
-				document.getElementById("tdLoginID").innerText=document.getElementById("zz24_Menu").innerText;
-			}
-			
-		</script>
-		
-		<script type="text/javascript">getUserName();</script>
-		
-	</body>
+		</tr>
+		<tr>
+			<td valign="top" class="footer">
+				<table width="650" border="0" align="center" cellpadding="0" cellspacing="0">
+					<tr>
+						<td>
+							<asp:LoginName ID="aspLoginName" runat="server"></asp:LoginName>
+						</td>
+						<td>
+						</td>
+						<td style="width: 58px;"><a id="adminLink">
+							<img id="imgLogo" src="http://teamspace.pg.com/sites/cppdpolicy/Images1/footer_logo.jpg" width="48" height="50" border="0" />
+						</a></td>
+						<td class="footer">If you have questions about this web site 
+							contact Trenda Pollard@513-983-5162 or
+						<a href="mailto:pollard.ts@pg.com">pollard.ts@pg.com</a> </td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+</form>
+
+<script type="text/javascript">getUserName();</script>
+
+
+<asp:ContentPlaceHolder id="PlaceHolderGlobalNavigation" runat="server"/>
+<asp:ContentPlaceHolder id="PlaceHolderGlobalNavigationSiteMap" runat="server"/>
+<asp:ContentPlaceHolder id="PlaceHolderSiteName" runat="server"/>
+
+
+<asp:ContentPlaceHolder id="PlaceHolderTopNavBar" runat="server">
+</asp:ContentPlaceHolder>
+<asp:ContentPlaceHolder id="PlaceHolderHorizontalNav" runat="server">
+</asp:ContentPlaceHolder>
+<asp:ContentPlaceHolder id="WSSDesignConsole" runat="server">
+</asp:ContentPlaceHolder>
+<asp:ContentPlaceHolder id="SPNavigation" runat="server">
+</asp:ContentPlaceHolder>
+
+
+<asp:ContentPlaceHolder id="PlaceHolderMiniConsole" runat="server">
+</asp:ContentPlaceHolder>
+<asp:ContentPlaceHolder id="PlaceHolderTitleRightMargin" runat="server">
+</asp:ContentPlaceHolder>
+<asp:ContentPlaceHolder id="PlaceHolderTitleAreaSeparator" runat="server">
+</asp:ContentPlaceHolder>
+<asp:ContentPlaceHolder id="PlaceHolderLeftNavBarDataSource" runat="server">
+</asp:ContentPlaceHolder>
+
+<asp:ContentPlaceHolder id="PlaceHolderCalendarNavigator" runat="server">
+</asp:ContentPlaceHolder>
+
+<asp:ContentPlaceHolder id="PlaceHolderLeftNavBarTop" runat="server">
+</asp:ContentPlaceHolder>
+
+<asp:ContentPlaceHolder id="PlaceHolderLeftNavBar" runat="server">
+	
+</asp:ContentPlaceHolder>
+
+<asp:ContentPlaceHolder id="PlaceHolderLeftActions" runat="server">
+</asp:ContentPlaceHolder>
+
+<asp:ContentPlaceHolder id="PlaceHolderNavSpacer" runat="server">
+</asp:ContentPlaceHolder>
+
+<asp:ContentPlaceHolder id="PlaceHolderLeftNavBarBorder" runat="server">
+</asp:ContentPlaceHolder>
+
+<asp:ContentPlaceHolder id="PlaceHolderBodyLeftBorder" runat="server">
+</asp:ContentPlaceHolder>
+
+
+<asp:ContentPlaceHolder id="PlaceHolderBodyRightMargin" runat="server">
+</asp:ContentPlaceHolder>
+
+<asp:ContentPlaceHolder id="PlaceHolderFormDigest" runat="server">
+</asp:ContentPlaceHolder>
+
+<asp:ContentPlaceHolder id="PlaceHolderUtilityContent" runat="server">
+</asp:ContentPlaceHolder>
+
+
+<asp:ContentPlaceHolder id="PlaceHolderBodyAreaClass" runat="server">
+</asp:ContentPlaceHolder>
+
+<asp:ContentPlaceHolder id="PlaceHolderTitleAreaClass" runat="server">
+</asp:ContentPlaceHolder>
+
+<asp:ContentPlaceHolder id="PlaceHolderTitleLeftBorder" runat="server"/>
+
+<script type="text/javascript">
+	
+	$(document).ready(function(){
+		$('.ms-listdescription').addClass("pageDescription");
+		$('.ms-listdescription').removeClass("ms-listdescription");
+		$('.ms-pagemargin').hide(); 
+	});
+	
+</script>
+
+</body>
 </html>
