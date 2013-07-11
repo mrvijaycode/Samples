@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h2>Create Object from JSON String</h2>
+<p>First Name: <span id="fname"></span></p> 
+
+<script>
+
+var employees = new Object();
+
+var employees = [
+{ "firstName" : "John1" , "lastName" : "Doe" }, 
+{ "firstName" : "Anna1" , "lastName" : "Smith" }, 
+{ "firstName" : "Peter1" , "lastName" : "Jones" },
+{ "firstName" : "smith1" , "lastName" : "Doe" }, 
+{ "firstName" : "Parker1" , "lastName" : "Smith" },
+
+{ "firstName" : "John2" , "lastName" : "Doe" }, 
+{ "firstName" : "Anna2" , "lastName" : "Smith" }, 
+{ "firstName" : "Peter2" , "lastName" : "Jones" },
+{ "firstName" : "smith2" , "lastName" : "Doe" }, 
+{ "firstName" : "Parker2" , "lastName" : "Smith" },
+
+{ "firstName" : "John3" , "lastName" : "Doe" }, 
+{ "firstName" : "Anna3" , "lastName" : "Smith" }, 
+{ "firstName" : "Peter3" , "lastName" : "Jones" },
+{ "firstName" : "smith3" , "lastName" : "Doe" }, 
+{ "firstName" : "Parker3" , "lastName" : "Smith" },
+
+{ "firstName" : "John4" , "lastName" : "Doe" }, 
+{ "firstName" : "Anna4" , "lastName" : "Smith" }, 
+{ "firstName" : "Peter4" , "lastName" : "Jones" },
+{ "firstName" : "smith4" , "lastName" : "Doe" }, 
+];
+//employees[2].firstName="Jonatan";
+//document.getElementById("fname").innerHTML=employees[2].firstName;
+
+var i = -1;
+var t = employees.length - 1;
+var k = 0;
+var PageNo = 1;
+
+alert(i + 1);
+
+function next() {
+	
+	var str = "";
+	for (var j = k; j <= i + 5; j++) {
+		if (j <= t) {
+			str += employees[j].firstName + ";";
+			if (k < t)
+				k = j + 1;
+		}
+	}
+	if (i < t - 5) {
+		i = i + 5;
+	} else
+		alert("No Next");
+	document.getElementById("fname").innerHTML = str;
+}
+
+function prev() {
+debugger
+var str = "";
+i = k ;
+
+	for (var j = k-5; j<= i; j++) {
+	    if (j <= t) {
+	        str += employees[j].firstName + ";";
+			k = j - 1;
+		}
+	}
+	//if (i < 0) {
+		//i = i-3;
+	//} else
+		//alert("No Next");
+	document.getElementById("fname").innerHTML = str;
+}
+
+function main(PageNo)
+{
+	var start = PageNo*5;
+	var end = start+5;
+	for (var j = start; j <= end; j++) {
+		if (j <= t) {
+			str += employees[j].firstName + ";";
+		}
+	}
+	document.getElementById("fname").innerHTML = str;
+}
+
+</script>
+
+<input type="button" value="<" onClick='prev()'/>
+<input type="button" value=">" onClick='next()'/>
+</body>
+</html>
