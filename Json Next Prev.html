@@ -4,6 +4,8 @@
 <h2>Create Object from JSON String</h2>
 <p>First Name: <span id="fname"></span></p> 
 
+<script type="text/javascript" src="jquery-1.8.3.js"></script>
+
 <script>
 
 var employees = new Object();
@@ -38,50 +40,44 @@ var employees = [
 var i = -1;
 var t = employees.length - 1;
 var k = 0;
-var PageNo = 1;
+var PageNo = 0;
 
 alert(i + 1);
 
 function next() {
-	
-	var str = "";
-	for (var j = k; j <= i + 5; j++) {
-		if (j <= t) {
-			str += employees[j].firstName + ";";
-			if (k < t)
-				k = j + 1;
-		}
+	var totCount = t / 5;
+	if (PageNo < totCount - 1) {
+		$('#btnPrev').show();
+		$('#btnNext').show();
+		PageNo = PageNo + 1;
+		built(PageNo);
+	} else {
+		$('#btnNext').hide();
+		$('#btnPrev').show();
 	}
-	if (i < t - 5) {
-		i = i + 5;
-	} else
-		alert("No Next");
-	document.getElementById("fname").innerHTML = str;
 }
 
 function prev() {
-debugger
-var str = "";
-i = k ;
-
-	for (var j = k-5; j<= i; j++) {
-	    if (j <= t) {
-	        str += employees[j].firstName + ";";
-			k = j - 1;
-		}
+	if (PageNo > 0) {
+		$('#btnPrev').show();
+		$('#btnNext').show();
+		PageNo = PageNo - 1;
+		built(PageNo);
+	} else {
+		$('#btnPrev').hide();
+		$('#btnNext').show();
 	}
-	//if (i < 0) {
-		//i = i-3;
-	//} else
-		//alert("No Next");
-	document.getElementById("fname").innerHTML = str;
+}
+function main()
+{
+	built(PageNo);
 }
 
-function main(PageNo)
-{
-	var start = PageNo*5;
+function built(pageN) { 
+	var str="";
+	var start = pageN*5;
 	var end = start+5;
-	for (var j = start; j <= end; j++) {
+	for (var j = start; j < end; j++) {
 		if (j <= t) {
 			str += employees[j].firstName + ";";
 		}
@@ -91,7 +87,10 @@ function main(PageNo)
 
 </script>
 
-<input type="button" value="<" onClick='prev()'/>
-<input type="button" value=">" onClick='next()'/>
+<script type="text/javascript">
+main();	
+</script>
+<input type="button" id="btnPrev" value="<" onClick='prev()'/>
+<input type="button" id="btnNext" value=">" onClick='next()'/>
 </body>
 </html>
