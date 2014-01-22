@@ -1,308 +1,466 @@
-/* Created By : Ravikishore */
-/* Created Date :06/17/2013 */
 
-var sourceTable = "";
-var clickID;
-var srcListName = "SourcingPlan";
-var spendPoolListName = "SourcingPlanItems";
-var arrayID = new Array();
+//***************************************************************
+//* Project Name     : GSS
+//* Application name :Genomics Experiments
+//* Dependencies     :
+//* Limitations      :
+//* Created Date     : 16 Jan 2013
+//* Author           : Rajesh Kumar N
+//* Changed by : Chinna(21 Jan 2014)
+//****************************************************************
 
-/*var sourceTable = '<table id="tblSourcePlan" width="100%" class="ms-listviewtable"  border="0" cellSpacing="0" cellPadding="2" >';
-sourceTable += '<thead><tr class="ms-vh2" vAlign="top"><th align="center" colspan="2">Sourcing Plan</th><th>Status</th><th>Appr.Date</th><th></th><th></th></tr></thead>';
- */
-var sourceTable = '<table id="tblSourcePlan" width="100%" class="tablesorter"  border="0" cellSpacing="0" cellPadding="2" >';
-sourceTable += '<thead><tr Align="top"><th align="center" colspan="2">Sourcing Plan</th><th>Status</th><th>Appr.Date</th></tr></thead>';
 
-var loginUser = $().SPServices.SPGetCurrentUser({
-		fieldName : "Title",
-		debug : false
-	});
+var reminderIds = "";
+var myStudiesRPT;
+var items = [];
+var totCount = 0;
+var PageNo = 0;
+var mandatoryQuery="";
 
-$(document).ready(function () {
+var DivImg ="<img alt='sort' align='center' src='http://teamspace.pg.com/sites/genomics/Site Assets/Images/Ascending.jpg' />";
 
-	$('#tdWelcome').text('Welcome ' + loginUser);
-	//debugger
-	//$('#Image7').append("<IMG src='http://teamspace.pg.com/sites/sourcingplanmanager/capitalsrc/images/MasterPage Images/my_tasks_hover_btn.jpg'>");
+//var decendingImg ="<img alt='sort' align='center' src='http://teamspace.pg.com/sites/genomics/Site Assets/Images/Descending.jpg' />";
 
-	var query = "<Query><Where><Eq><FieldRef Name='Buyer_SpendPoolOwner'/><Value Type='User'>" + loginUser + "</Value></Eq></Where></Query>";
-	$().SPServices({
-		operation : "GetListItems",
-		async : false,
-		listName : spendPoolListName,
-		CAMLQuery : query,
-		completefunc : function (xData, Status) {
 
-			$(xData.responseXML).SPFilterNode("z:row").each(function (i) {
-				var title = $(this).attr('ows_Title');
-				arrayID[i] = title;
-			});
-		}
-	});
+var ImgResult="";
+var imgUrl='';
 
-	var viewFields = '<ViewFields><FieldRef Name="ID" /><FieldRef Name="Title" /><FieldRef Name="Status" /><FieldRef Name="SourcingPlan" /><FieldRef Name="S_SiteBuyer1_UpManager_ClusterLe0" /></ViewFields>';
-	$().SPServices({
-		operation : "GetListItems",
-		async : false,
-		listName : "SourcingPlan",
-		CAMLViewFields : viewFields,
-		completefunc : function (xData, Status) {
-			var resXML = $(xData.responseXML);
-			appendSourcingPlans(resXML);
-		}
-	});
-});
 
-function appendSourcingPlans(resXML) {
-	var strSourcePlan = "";
-	var temp = true;
-	$(resXML).SPFilterNode("z:row").each(function () {
-		var splID = $(this).attr("ows_ID");
-		var ind = $.inArray(splID, arrayID);
-		if (ind > -1) {
-			//debugger;
-			temp = false;
-			var sourcePlan = $(this).attr("ows_SourcingPlan");
-			if (strSourcePlan.indexOf(sourcePlan) == -1) {
-				//var status = $(this).attr("ows_Status");
-				var status = $(this).attr("ows_Title");
-				if (status == null || status == undefined)
-					status = '';
-				var date = $(this).attr('ows_S_SiteBuyer1_UpManager_ClusterLe0');
-				if (date == null || date == undefined)
-					date = '';
-				else
-					date = reformDate(date);
-				strSourcePlan += sourcePlan + "~";
-				sourceTable += '<tr><td vAlign="top"><input type="radio" name="dynradio" id="btnRadio" onclick="javascript:getPools(&quot;' + splID + '&quot;)"; /></td><td>' + sourcePlan + '</td><td>' + status + '</td><td>' + date + '</td>';
-				sourceTable += '</tr>';
-			}
-		}
-	});
-	if (temp) {
-		sourceTable += "<tr><td class='ms-vb2' colspan='4'>No tasks are assigned.</td></tr>";
-	}
+var strQuery = $(location).attr('href').split('?')[1].split('=')[1];
+//alert(strQuery);
 
-	sourceTable += '</table>';
-	$("#mySrcPlanID").html(sourceTable);
-	//sort source plan table
-	$("#tblSourcePlan").tablesorter();
-}
+var ALL_STUDIES = "allStudies";
+var DELAY_STUDIES = "delayed";
+var ACTIVE_STUDIES = "active";
+var COMP_STUDIES = "completed";
+var My_STUDIES = "MyStudies";
+var CANCELED = "Cancel";
+var orderBy= "<OrderBy><FieldRef Name='Modified' Ascending='False' /></OrderBy>";
+var strCaml = "<Query>"+orderBy+"<Where>"+mandatoryQuery+"</where></Query>";
+$(document).ready(function(){
 
-function getPools(id) {
-	clickID = id;
-	getData(id);
-}
+getMyGeneomicStudies();
+})
 
-function getData(title) {
-	var poolTable = "";
-	var query = "<Query><Where><And><Eq><FieldRef Name='Title'/><Value Type='Text'>" + title + "</Value></Eq><Eq><FieldRef Name='Buyer_SpendPoolOwner'/><Value Type='User'>" + loginUser + "</Value></Eq></And></Where></Query>";
-	$().SPServices({
-		operation : "GetListItems",
-		async : false,
-		listName : spendPoolListName,
-		CAMLQuery : query,
-		completefunc : function (xDa, Status) {
+//var orderBy= "<OrderBy><FieldRef Name='Modified' Ascending='False' /></OrderBy>";
 
-			var itemsCount = $(xDa.responseXML).SPFilterNode("rs:data").attr("ItemCount");
-			if (itemsCount > 0) {
-				$(xDa.responseXML).SPFilterNode("z:row").each(function (i) {
-					var spendingPool = $(this).attr("ows_SpendingPool");
-					if (spendingPool == "" || spendingPool == 'undefined' || spendingPool == null)
-						spendingPool = "";
-					var materialCode = $(this).attr("ows_MaterialCode");
-					if (materialCode == "" || materialCode == 'undefined' || materialCode == null)
-						materialCode = "";
-					var buyerSpendPoolOwner = $(this).attr("ows_Buyer_SpendPoolOwner");
-					if (buyerSpendPoolOwner == "" || buyerSpendPoolOwner == 'undefined' || buyerSpendPoolOwner == null)
-						buyerSpendPoolOwner = "";
-					else
-						buyerSpendPoolOwner = buyerSpendPoolOwner.split(";#")[1];
-					var estimatedSpend = "$" + $(this).attr("ows_EstimatedSpend").split(".")[0];
-					if (estimatedSpend == "" || estimatedSpend == 'undefined' || estimatedSpend == null)
-						estimatedSpend = "";
-					var status = $(this).attr("ows_Status");
-					if (status == "" || status == 'undefined' || status == null)
-						status = "";
-					var curID = $(this).attr("ows_ID");
-					var supplier = $(this).attr("ows_Supplier");
-					if (supplier == "" || supplier == 'undefined' || supplier == null)
-						supplier = "";
-					var purchasingProcess = $(this).attr("ows_PurchasingProcess");
-					if (purchasingProcess == "" || purchasingProcess == 'undefined' || purchasingProcess == null)
-						purchasingProcess = "";
-					
-					var specAvailableDate = $(this).attr("ows_SpecificationAvailableDate");
-					
-					if (specAvailableDate == "" || specAvailableDate == 'undefined' || specAvailableDate == null)
-						specAvailableDate = "";
-					else
-						specAvailableDate = reformDate(specAvailableDate);
-					
-					var comments = $(this).attr("ows_Notes");
-					if (comments == "" || comments == 'undefined' || comments == null)
-						comments = "";
-						
-						
-						var sourceTime = $(this).attr("ows_SourcingTiming");
-					if (sourceTime == "" || sourceTime == 'undefined' || sourceTime == null)
-						sourceTime = "";
+//var strCaml = "<Query>"+orderBy+"<Where>"+mandatoryQuery+"</where></Query>";
 
-					poolTable += '<tr>';
-					poolTable += '<td  class="ms-vb2"><label id="lblSpPool' + i + '">' + spendingPool + '</label></td>';
-					poolTable += '<td class="ms-vb2"><label id="lblmaterialCode' + i + '">' + materialCode + '</label></td>';
-					poolTable += '<td class="ms-vb2"><label id="lblbspo' + i + '">' + buyerSpendPoolOwner + '</label></td>';
-					poolTable += '<td class="ms-vb2"><label id="lblestimated' + i + '">' + estimatedSpend + '</label></td>';
-					poolTable += '<td class="ms-vb2"><label id="lblestimated' + i + '">' + reformDate(sourceTime) + '</label></td>';
-					poolTable += '<td class="ms-vb2">';
-					poolTable += buildSelectBox(status, i);
-					poolTable += '<label id="lblStatus' + i + '">' + status + '</label></td>';
-					poolTable += '<td class="ms-vb2"><input type="text" id="txtSupplier' + i + '" value="' + supplier + '" style="display:none"><label id="lblSupplier' + i + '">' + supplier + '</label></td>';
-					poolTable += '<td class="ms-vb2">' + buildPurpose(purchasingProcess,i) + '<label id="lblPurProcess' + i + '">' + purchasingProcess + '</label></td>';
-					poolTable += '<td class="ms-vb2"><input type="text" id="txtSpecAvaDate' + i + '" value="' + specAvailableDate + '" style="display:none"><label id="lblSpecAvaDate' + i + '">' + specAvailableDate + '</label></td>';
-					poolTable += '<td class="ms-vb2"><textarea  rows=3 cols=10 id="txtComments' + i + '"  style="display:none">' + comments + '</textarea><label id="lblComments' + i + '">' + comments + '</label></td>';
-					//poolTable += '<td><img src="http://teamspace.pg.com/sites/sourcingplanmanager/capitalsrc/Site Pages/updatebtn.jpg" onclick="goEdit(' + i + ');" alt="" /></td>';
-					poolTable += '<td valign="top"><img alt="Edit" id="editID' + i + '" src="/_layouts/images/edititem.gif" border="0" onclick="goEdit(' + i + ');" alt="" /></td>';
-					//poolTable += '<td ><input type="button"  id="btnUpdate' + i + '" disabled="disabled" onclick="updateItem(&quot;' + curID + '&quot;,' + i + ')" value="Update"></td>';
-					poolTable += '<td valign="top"><img style="display:none" alt="Update" src="http://teamspace.pg.com/sites/sourcingplanmanager/capitalsrc/Site Pages/updatebtn.jpg" border="0"  id="btnUpdate' + i + '"   onclick="updateItem(&quot;' + curID + '&quot;,' + i + ')" value="Update"><img style="display:none" alt="Cancel" src="/_layouts/images/delitem.gif" border="0"  id="btnCancel' + i + '" onclick="goEdit(' + i + ');" value="Cancel"></td>';
-					//poolTable += '<td><img style="display:none" alt="Cancel" src="/_layouts/images/delitem.gif" border="0"  id="btnCancel' + i + '"   onclick="updateItem(&quot;' + curID + '&quot;,' + i + ')" value="Update"></td>';
-					poolTable += '<td class="ms-vb2" valign="top"><a href="http://teamspace.pg.com/sites/sourcingplanmanager/capitalsrc/Lists/SourcingPlanItems/EditSourcingPlanItems.aspx?ID=' + curID + '&Source=http://teamspace.pg.com/sites/sourcingplanmanager/capitalsrc/Site%20Pages/MyTasks.aspx">Edit</a></td></tr>'; // Added 6/18/13 by chinna
-				});
-			}
-		}
-	});
+function getMyGeneomicStudies()
+{
 
-	var cols = "";
-	cols += '<tr>';
-	cols += '<th>Spending Pool</th>';
-	cols += '<th>Material Code</th>';
-	cols += '<th>Buyer_SpendPoolOwner</th>';
-	cols += '<th>Estimated Spend</th>';
-	cols += '<th>Status</th>';
-	cols += '<th>Supplier</th>';
-	cols += '<th>Purchasing process</th>';
-	cols += '<th>Spec available date</th>';
-	cols += '<th>Comments</th>';
-	cols += '<th colspan="3">&nbsp;</th>';
-	cols += '</tr>';
-	if (poolTable == "")
-		poolTable = "<tr><td>No records found.</td></tr>";
-	poolTable = "<table id='tblSpendPool' width='100%' cellspacing='0' cellpadding='8' class='tablesorter'><thead>" + cols + "</thead>" + poolTable + "</table>";
-	$("#mySrcpoolID").html(poolTable);
-	$("#tblSpendPool").tablesorter();
-}
+/*
+var mandatoryQuery="<And><And><And><And><IsNotNull><FieldRef Name='GC_x0020_Analyst' /></IsNotNull><IsNotNull><FieldRef Name='Statistics_x0020_Owner' />"+
+		"</IsNotNull></And><IsNotNull><FieldRef Name='Bio_x0020_Informatics_x0020_Owne' /></IsNotNull></And><IsNotNull>"+
+		"<FieldRef Name='Overall_Study_Status' /></IsNotNull></And><Neq><FieldRef Name='studyCancel' /><Value Type='Boolean'>1</Value>"+
+		"</Neq></And>";
+		
+*/		
+//Changed query by Vijay Bhaskar CH, due to requesting of the report when Study Information is updated.
+	 mandatoryQuery="<And><And><And><IsNotNull><FieldRef Name='GC_x0020_Analyst' /></IsNotNull><IsNotNull><FieldRef Name='Statistics_x0020_Owner' />"+
+		"</IsNotNull></And><IsNotNull><FieldRef Name='Bio_x0020_Informatics_x0020_Owne' /></IsNotNull></And>"+
+		"<Neq><FieldRef Name='studyCancel' /><Value Type='Boolean'>1</Value>"+
+		"</Neq></And>";
 
-function buildSelectBox(status, num) {
+	
+	var userName = $().SPServices.SPGetCurrentUser({
+			fieldName : "Title",
+			debug : false
+		});
 
-	var formOptions = "";
-	switch (status) {
-	case "Create":
-		formOptions += '<select id="selStatus' + num + '" style="display:none"><option selected="selected">Create</option><option>In Process</option><option>Completed</option><option>Awarded<option>Cancelled</option></select>';
+	switch (strQuery) {
+	case My_STUDIES:
+		$("#pgTitle").text('My Studies')
+		$("#brdCurrPage").text('My Studies')
+		document.title = 'My Studies';
+		$(this).attr("title", "My Studies");
+		strCaml = "<Query>"+orderBy+"<Where><And><And>" + mandatoryQuery + "<Or><Or><Or><Eq><FieldRef Name='GC_x0020_Analyst' /><Value Type='User'>" + userName + "</Value></Eq><Eq><FieldRef Name='Statistics_x0020_Owner' />" +
+			"<Value Type='User'>" + userName + "</Value></Eq></Or><Eq><FieldRef Name='Bio_x0020_Informatics_x0020_Owne' /><Value Type='User'>" + userName + "</Value></Eq></Or><Eq><FieldRef Name='Author' /><Value Type='User'>" + userName + "</Value></Eq></Or></And><Neq><FieldRef Name='enableStage' /><Value Type='Text'>StepM4</Value></Neq></And></Where></Query>";
 		break;
-	case "In Process":
-		formOptions += '<select id="selStatus' + num + '" style="display:none"><option>Create</option><option selected="selected">In Process</option><option>Completed</option><option>Awarded<option>Cancelled</option></select>';
+
+	case DELAY_STUDIES:
+		$("#pgTitle").text('Delayed Studies')
+		$("#brdCurrPage").text('Delayed Studies')
+		$(this).attr("title", "Delayed Studies");
+		document.title = 'Delayed Studies';
+		strCaml = "<Query>"+orderBy+"<Where><And>" + mandatoryQuery + "<Eq><FieldRef Name='Delayed' /><Value Type='Boolean'>1</Value></Eq></And></Where></Query>";
 		break;
-	case "Completed":
-		formOptions += '<select id="selStatus' + num + '" style="display:none"><option>Create</option><option>In Process</option><option selected="selected">Completed</option><option>Awarded<option>Cancelled</option></select>';
+
+	case ACTIVE_STUDIES:
+		$("#pgTitle").text('Active Studies')
+		$("#brdCurrPage").text('Active Studies')
+		$(this).attr("title", "Active Studies");
+		strCaml = "<Query>"+orderBy+"<Where><And>" + mandatoryQuery + "<Neq><FieldRef Name='enableStage' /><Value Type='Text'>StepM4</Value></Neq></And></Where></Query>";
 		break;
-	case "Awarded":
-		formOptions += '<select id="selStatus' + num + '" style="display:none"><option>Create</option><option>In Process</option><option>Completed</option><option selected="selected">Awarded</option><option>Cancelled</option></select>';
+
+	case COMP_STUDIES:
+		$("#pgTitle").text('Completed Studies')
+		$("#brdCurrPage").text('Completed Studies')
+		$(this).attr("title", "Completed Studies");
+		document.title = 'Completed Studies';
+		strCaml = "<Query>"+orderBy+"<Where><And>" + mandatoryQuery + "<Eq><FieldRef Name='enableStage' /><Value Type='Text'>StepM4</Value></Eq></And></Where></Query>";
 		break;
-	case "Cancelled":
-		formOptions += '<select id="selStatus' + num + '" style="display:none"><option>Create</option><option>In Process</option><option>Completed</option><option>Awarded</option><option selected="selected">Cancelled</option></select>';
+
+	case ALL_STUDIES:
+		$("#pgTitle").text('All Studies')
+		$("#brdCurrPage").text('All Studies')
+		$(this).attr("title", "All Studies");
+		document.title = 'All Studies';
+		strCaml = "<Query>"+orderBy+"<Where>" + mandatoryQuery + "</Where></Query>";
+		break;
+
+	case CANCELED:
+		$("#pgTitle").text('Cancelled Studies')
+		$("#brdCurrPage").text('Cancelled Studies')
+		$(this).attr("title", "Cancelled Studies");
+		document.title = 'Cancelled Studies';
+		strCaml = "<Query><Where><Eq><FieldRef Name='studyCancel' /><Value Type='Boolean'>1</Value></Eq></Where>"+orderBy+"</Query>";
 		break;
 	}
-	return formOptions;
+	
+	getMyProject(strCaml);
+
 }
 
-//for the process
-function buildPurpose(strVal, num) {
-	var formOptions = "";
-	switch (strVal) {
-	case "Competitive Inquiry":
-		formOptions += '<select id="selPurProcess' + num + '" style="display:none"><option selected="selected">Competitive Inquiry</option><option>Negotiation</option><option>Price List</option></select>';
-		break;
-	case "Negotiation":
-		formOptions += '<select id="selPurProcess' + num + '" style="display:none"><option>Competitive Inquiry</option><option selected="selected">Negotiation</option><option>Price List</option></select>';
-		break;
-	case "Price List":
-		formOptions += '<select id="selPurProcess' + num + '" style="display:none"><option>Competitive Inquiry</option><option>Negotiation</option><option selected="selected">Price List</option></select>';
-		break;
-	}
-	return formOptions;
-}
 
-/// updating selected item
-function updateItem(idOfItem, num) {
-	var status = $("#selStatus" + num + "").val(); //.val();
-	var supplier = $("#txtSupplier" + num + "").val();
-	var purProcess = $("#selPurProcess" + num + "").val();
-	var SpecAvaDate = $("#txtSpecAvaDate" + num + "").val();
-	var comments = $("#txtComments" + num + "").val();
-	SpecAvaDate = formDate(SpecAvaDate);
-
-	$().SPServices({
-		operation : "UpdateListItems",
-		listName : spendPoolListName,
-		ID : idOfItem,
-		valuepairs : [["Notes", comments], ["Status", status], ["Supplier", supplier], ["PurchasingProcess", purProcess], ["SpecificationAvailableDate", SpecAvaDate]],
-		completefunc : function (xData, Status) {
-			if (Status)
-				getPools(clickID);
-		}
-	});
-}
-
-function goEdit(num) {
+function getMyProject(strCaml) {
 	//debugger;
-	$('#editID' + num + '').hide();
-	$('#btnUpdate' + num + '').show();
-	$('#btnCancel' + num + '').show(); //added on 18/6/13 by chinna
-	var spID = "txtSupplier" + num;
-	if ($("#" + spID + "").is(':visible')) {
-		$("#selStatus" + num + "").hide();
-		$("#txtSupplier" + num + "").hide();
-		$("#selPurProcess" + num + "").hide();
-		$("#txtSpecAvaDate" + num + "").hide();
-		$("#txtComments" + num + "").hide();
-		$("#lblStatus" + num + "").show();
-		$("#lblPurProcess" + num + "").show();
-		$("#lblSupplier" + num + "").show();
-		$("#lblComments" + num + "").show();
-		$("#lblSpecAvaDate" + num + "").show();
-		$("#btnUpdate" + num + "").attr('disabled', true);
+	
+	var viewFlds = "<ViewFields><FieldRef Name='Editor' /><FieldRef Name='Author' /><FieldRef Name='Created' /><FieldRef Name='Modified' /><FieldRef Name='ID' />" +
+		"<FieldRef Name='EnableWF' /><FieldRef Name='enableStage' /><FieldRef Name='Reason_for_Delay_4' /><FieldRef Name='M3b_act_Statistics_Report_Date' /><FieldRef Name='M3a_act_Initial_QC_completion_da' />" +
+		"<FieldRef Name='Reason_for_Delay_m3b' /><FieldRef Name='Reason_for_Delay_m3a' /><FieldRef Name='Reason_for_Delay_m2d' /><FieldRef Name='Reason_for_Delay_m2c' /><FieldRef Name='Reason_for_Delay_m2b' />" +
+		"<FieldRef Name='M2d_act_Data_Posted_date' /><FieldRef Name='M2c_act_Chips_Run_date' /><FieldRef Name='M2b_cRNA_act_Dates_Label' /><FieldRef Name='M2a_act_RNA_Isolation_Date' /><FieldRef Name='cRNA_Protocol' />" +
+		"<FieldRef Name='Comments_M2a' /><FieldRef Name='Reason_for_Delay_M2a' /><FieldRef Name='RNA_x0020_Procotol' /><FieldRef Name='Reason_for_Delay_m1' /><FieldRef Name='M1_Actual_Samples_Received_Date' />" +
+		"<FieldRef Name='ReminderIds' /><FieldRef Name='M4_BioInformatics_Analysis_date' /><FieldRef Name='M3b_Statistics_Report_Date' /><FieldRef Name='M3a_Initial_QC_completion_date' /><FieldRef Name='M2d_Date_Data_Posted' />" +
+		"<FieldRef Name='M2c_Date_Chips_Run' /><FieldRef Name='M2b_cRNA_Dates_Label' /><FieldRef Name='M2a_RNA_Isolation_Date' /><FieldRef Name='M1_Anticipated_Samples' /><FieldRef Name='TissueType' /><FieldRef Name='DescriptionPurpose' />" +
+		"<FieldRef Name='Chip_x0020_Type' /><FieldRef Name='GSSID' /><FieldRef Name='Fundamental_questions' /><FieldRef Name='Purpose' /><FieldRef Name='Comments_4' /><FieldRef Name='Comments_m3b' />" +
+		"<FieldRef Name='Comments_m2d' /><FieldRef Name='Comments' /><FieldRef Name='Delayed' /><FieldRef Name='Overall_Study_Status' /><FieldRef Name='BioInformatics_Analysis_date_4' /><FieldRef Name='Statistics_Report_Date_M3b' /><FieldRef Name='Initial_QC_completion_date_M3a' />" +
+		"<FieldRef Name='Date_Data_Posted_M2d' /><FieldRef Name='Date_Chips_Run_M2c' /><FieldRef Name='cRNA_Dates_Label_M2b' /><FieldRef Name='NA_Isolation_Date_M2a' /><FieldRef Name='Estimated_timing' /><FieldRef Name='ProtocolNumber' /><FieldRef Name='Estimated_x0020_Number_x0020_of_' />" +
+		"<FieldRef Name='Study_x0020_Name' /><FieldRef Name='Bio_x0020_Informatics_x0020_Owne' /><FieldRef Name='Statistics_x0020_Owner' /><FieldRef Name='GC_x0020_Analyst' /><FieldRef Name='Title' /></ViewFields>";
+		
+	
+	$().SPServices({
+		operation : "GetListItems",
+		async : false,
+		listName : "Study",
+		CAMLQueryOptions : "<QueryOptions> <IncludeMandatoryColumns>True</IncludeMandatoryColumns><IncludeAttachmentUrls>TRUE</IncludeAttachmentUrls></QueryOptions>",
+		CAMLQuery : strCaml,
+		CAMLViewFields : viewFlds,
+		CAMLRowLimit:2000,
 
-		$('#btnUpdate' + num + '').hide();
-		$('#btnCancel' + num + '').hide();
-		$('#editID' + num + '').show();
+		completefunc : function (xData, Status) {
+			
+			if($(xData.responseXML).SPFilterNode("z:row").length!=0)
+			myStudiesRPT=$(xData.responseXML).SPFilterNode("z:row");
+			
+			getMyStudiesRPT(0);
+		
+			
+		}
+	});
+	
+}
 
-	} else {
-		$('#btnUpdate' + num + '').show(); //added on 18/6/13 by chinna
+// Chinna 1814
+ 
 
-		$("#selStatus" + num + "").show();
-		$("#txtSupplier" + num + "").show();
-		$("#selPurProcess" + num + "").show();
-		$("#txtSpecAvaDate" + num + "").show();
-		$("#txtComments" + num + "").show();
-		$("#lblStatus" + num + "").hide();
-		$("#lblPurProcess" + num + "").hide();
-		$("#lblSupplier" + num + "").hide();
-		$("#lblComments" + num + "").hide();
-		$("#lblSpecAvaDate" + num + "").hide();
-		$("#btnUpdate" + num + "").attr('disabled', false);
+function getMyStudiesRPT(z)
+{
+items = [];
+
+
+	
+ var x = 1;
+ if(myStudiesRPT!=null)
+ {
+ var xLen=myStudiesRPT.length;
+
+	myStudiesRPT.each(function (i) {
+//debugger;
+
+				//if(i>=parseInt(z)*10 && i<=parseInt(z)*10+9)
+				//{
+
+				if ($(this).attr('ows_Study_x0020_Name')) {
+				
+					var docID = $(this).attr('ows_ID')				
+					var StdName = $(this).attr('ows_Study_x0020_Name');
+					
+					if($(this).attr('ows_GSSID'))
+						var GSSID = $(this).attr('ows_GSSID');
+					else
+						 GSSID = "";	
+					if ($(this).attr('ows_Author'))
+						var BU = $(this).attr('ows_Author').split(";#")[1];
+					else
+						var BU = "";
+					
+					if ($(this).attr('ows_GC_x0020_Analyst'))
+						var GC = $(this).attr('ows_GC_x0020_Analyst').split(";#")[1];
+					else
+						var GC = "";
+					
+					if ($(this).attr('ows_Statistics_x0020_Owner'))
+						var Stats = $(this).attr('ows_Statistics_x0020_Owner').split(";#")[1];
+					else
+						var Stats = "";
+					
+					if ($(this).attr('ows_Bio_x0020_Informatics_x0020_Owne'))
+						var BioInfo = $(this).attr('ows_Bio_x0020_Informatics_x0020_Owne').split(";#")[1];
+					else
+						var BioInfo = "";
+					
+					var majorMileStone=$(this).attr('ows_enableStage');
+					
+					if(majorMileStone=="StepM1" ||majorMileStone=="StepM2a" || majorMileStone=="StepM2b" || majorMileStone=="StepM2c")
+					majorMileStone="Clinical"
+					else if(majorMileStone=="StepM2d" || majorMileStone=="StepM3a")
+					majorMileStone="Genomics"
+					else if(majorMileStone=="StepM3b")
+					majorMileStone="Statistics"
+					else if(majorMileStone=="StepM4")
+					majorMileStone="Bio Informatics"
+					else
+					majorMileStone=""
+					
+					
+					
+			var new_obj = {
+			"ID":docID,
+            "GSS": GSSID,
+            "StudyName": StdName,
+            "MajorMilestone": majorMileStone,
+            "BU": BU,
+            "Genomics": GC,
+            "Statistics": Stats, 
+            "Bioinformatics":BioInfo 
+            };
+        	items.push(new_obj);
+					
+					
+					
+					/*if (x % 2 != 0)
+						strHtml += "<tr><td height='20' style='padding-left:10px' align='left' >" + $(this).attr('ows_GSSID') + "</td><td height='20' style='padding-left:10px;' align='left' ><a style='text-decoration:none' href='http://teamspace.pg.com/sites/genomics/Site%20Assets/Pages/studyForm.aspx?itmid=" + $(this).attr('ows_ID') + "'>" + $(this).attr('ows_Study_x0020_Name') + "</a></td><td height='20' style='padding-left:10px;white-space:nowrap' align='left' >" + majorMileStone + "</td><td height='20' style='padding-left:10px;white-space:nowrap' align='left' >" + BU + "</td><td height='20' style='padding-left:10px;white-space:nowrap' align='left' >" + GC + "</td><td height='20' style='padding-left:10px;white-space:nowrap' align='left' >" + Stats + "</td><td height='20' style='padding-left:10px;white-space:nowrap' align='left' >" + BioInfo + "</td></tr>";
+					else
+						strHtml += "<tr class='ms-alternating'><td height='20' style='padding-left:10px' align='left' >" + $(this).attr('ows_GSSID') + "</td><td height='20' style='padding-left:10px;' align='left' ><a style='text-decoration:none' href='http://teamspace.pg.com/sites/genomics/Site%20Assets/Pages/studyForm.aspx?itmid=" + $(this).attr('ows_ID') + "'>" + $(this).attr('ows_Study_x0020_Name') + "</a></td><td height='20' style='padding-left:10px;white-space:nowrap' align='left' >" +majorMileStone + "</td><td height='20' style='padding-left:10px;white-space:nowrap' align='left' >" + BU + "</td><td height='20' style='padding-left:10px;white-space:nowrap' align='left' >" + GC + "</td><td height='20' style='padding-left:10px;white-space:nowrap' align='left' >" + Stats + "</td><td height='20' style='padding-left:10px;white-space:nowrap' align='left' >" + BioInfo + "</td></tr>";
+					
+					x++;*/
+					}
+				//}
+			});		
+			buildHTML(PageNo);
 	}
-	$("#txtSpecAvaDate" + num + "").datepicker();
+}	
+	function buildHTML(pageN) {
+	//debugger;
+		t = items.length - 1;
+    	var start = pageN * 10;
+    	var end = start + 10;
+    	var str = "";
+    	totCount = t / 10;
+    	var tbl = "";
+    	
+    	
+    	
+    	var strHtml ="<table width='100%' border='0' align='center' cellpadding='4' cellspacing='1' class='ms-WPBorder'>" +
+					"<tr><td height='15' align='left' class='ms-menutoolbar' style='font-weight:bold'><table><tr><td id='DivImg1'></td><td><a style='cursor:pointer' onclick='Sorting(\"GSS\",\"DivImg1\")'>&nbsp;GSS#</a></td></tr></table></td><td  height='15' align='left' style='font-weight:bold;white-space:nowrap' class='ms-menutoolbar'><table><tr><td id='DivImg2'></td><td><a style='cursor:pointer' onclick='Sorting(\"Study Name\",\"DivImg2\")'>&nbsp;Study Name</a></td></tr></table></td><td  height='15' align='left' style='font-weight:bold;white-space:nowrap' class='ms-menutoolbar'><table><tr><td id='DivImg3'></td><td><a style='cursor:pointer' onclick='Sorting(\"Major Milestone\",\"DivImg3\")'>&nbsp;Major Milestone</a></td></tr></table></td><td style='font-weight:bold'  align='left' class='ms-menutoolbar'><table><tr><td id='DivImg4'></td><td><a style='cursor:pointer' onclick='Sorting(\"BU\",\"DivImg4\")'>&nbsp;BU</a></td></tr></table></td><td  style='font-weight:bold;white-space:nowrap' align='left' class='ms-menutoolbar'><table><tr><td id='DivImg5'></td><td><a style='cursor:pointer' onclick='Sorting(\"Genomics\",\"DivImg5\")'>&nbsp;Genomics</a></td></tr></table></td><td style='font-weight:bold'  align='left' class='ms-menutoolbar'><table><tr><td id='DivImg6'></td><td><a style='cursor:pointer' onclick='Sorting(\"Statistics\",\"DivImg6\")'>&nbsp;Statistics</a></td></tr></table></td><td style='font-weight:bold;white-space:nowrap'  align='left' class='ms-menutoolbar'><table><tr><td id='DivImg7'></td><td><a style='cursor:pointer' onclick='Sorting(\"Bioinformatics\",\"DivImg7\")'>\&nbsp;Bioinformatics</a></td></tr></table></td></tr>";
+    	
+    	//src='http://teamspace.pg.com/sites/genomics/Site Assets/Images/Ascending.jpg'
+    	//$("#DivImg1").prepend("<img alt='sort' align='center' src='http://teamspace.pg.com/sites/genomics/Site Assets/Images/Ascending.jpg' />");
+    	//$("#DivImg1").append("<img id='theImg' src='http://teamspace.pg.com/sites/genomics/Site Assets/Images/Ascending.jpg'/>");
+    	
+    	if (items.length > 0) {
+    		for (var j = start; j < end; j++) {
+    			if (j <= t) {
+    			
+    				tbl += "<tr><td height='20' style='padding-left:10px' align='left' >" + items[j].GSS+ "</td>";
+    				tbl += "<td height='20' style='padding-left:10px' align='left' ><a style='text-decoration:none' href='http://teamspace.pg.com/sites/genomics/Site%20Assets/Pages/studyForm.aspx?itmid=" +items[j].ID+ "'>" + items[j].StudyName+ "</td>";
+    				tbl += "<td height='20' style='padding-left:10px' align='left' >" + items[j].MajorMilestone+ "</td>";
+    				tbl += "<td height='20' style='padding-left:10px' align='left' >" + items[j].BU+ "</td>";
+    				tbl += "<td height='20' style='padding-left:10px' align='left' >" + items[j].Genomics+ "</td>";
+    				tbl += "<td height='20' style='padding-left:10px' align='left' >" + items[j].Statistics+ "</td>";
+    				tbl += "<td height='20' style='padding-left:10px' align='left' >" + items[j].Bioinformatics+ "</td></tr>";
+    				
+    				
+    				var tot = parseInt(t) + 1;
+    			    if (end > tot) {
+       				end = tot;
+       				}
+    				
+    			
+    			}   			  		
+    			
+    			
+    	    }
+    			 
+    		strHtml =strHtml+tbl+"</table>";
+    		//debugger;
+    		
+    	
+    	}
+    	else {
+        		tbl += "<tr><td>Studies are not available</td></tr>";
+    	     }
+    	         	var headers = "<table width='100%' border='0' cellSpacing='0' cellPadding='0'><tr><td align='left' class='itemTitle' style='14px;color:black'> Results :" + start + " - " + end + " of " + tot + "</td><td align=right class='norTxt' style='padding: 5px;'><a href='javascript:void(0)' id='btnPrev' onclick='prev()'>Previous</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='javascript:void(0)' id='btnNext' onclick='next()'>Next</a></td></tr><tr><td height=3px></td></tr></table>";
+
+
+	$("#studyStatusDiv").html(headers+strHtml);
+	
+	$("#"+ImgResult+"").html(imgUrl);   		
+	
+	$(".ms-dlgOverlay").hide();
+	
+	
+	//$('#btnPrev').hide();
+
+
+	if(pageN  == 0)
+	{
+		$('#btnPrev').hide();
+		//$('#btnNext').hide();
+
+	}
+	if(end >= tot)
+	{
+		$('#btnNext').hide();
+
+	}
+	
+
+}
+	
+	/*if(x>1)
+	{
+	strHtml+="</table>";
+	
+	strHtml+="<br/><br/><table width='100%' cellpadding=0 cellspacing=0 align=right><tr><td>";
+
+	
+	for(var j=0;j<xLen/10;j++)
+	{
+	if(j==0)
+		strHtml+="<a href='javascript:void(0)' style='color:red' id='navi"+j+"' onclick='getMyStudiesRPT(&quot;"+j+"&quot;);highlightAnchor($(this).attr(&quot;id&quot;))'>"+(parseInt(j)+1)+"</a>&nbsp;&nbsp;&nbsp;";
+	else
+	strHtml+="<a href='javascript:void(0)' id='navi"+j+"' onclick='getMyStudiesRPT(&quot;"+j+"&quot;);highlightAnchor($(this).attr(&quot;id&quot;))'>"+(parseInt(j)+1)+"</a>&nbsp;&nbsp;&nbsp;";
+		//<a href='javascript:void()' onclick='getNextPage(&quot;1&quot;)'>2</a>&nbsp;&nbsp;&nbsp;<a href='javascript:void()' onclick='getNextPage(&quot;2&quot;)'>3</a>&nbsp;&nbsp;&nbsp;<a href='javascript:void()' onclick='getNextPage(&quot;3&quot;)'>4</a>&nbsp;&nbsp;&nbsp;<a href='javascript:void()' onclick='getNextPage(&quot;4&quot;)'>5</a></td></tr></table>";
+	}
+
+	strHtml+="</td></tr></table>";
+	
+	
+	}
+	else
+	{
+		strHtml="<span style='font-weight:bold'> Studies are not available</span>";
+	}*/
+
+
+
+ function highlightAnchor(currObj)
+ {
+
+	 var anchorParent=$("#"+currObj).parent().find('a');
+ 
+	 anchorParent.each(function(){
+ 	$(this).css('color','blue')
+ 	})
+ 
+ 	$("#"+currObj).css('color','red');
+ }
+ 
+
+var count=0;
+//var DivImg ="<img alt='sort' align='center' src='http://teamspace.pg.com/sites/genomics/Site Assets/Images/Ascending.jpg' />";
+//var decendingImg ="<img alt='sort' align='center' src='http://teamspace.pg.com/sites/genomics/Site Assets/Images/Descending.jpg' />";
+
+function Sorting(sortColumn,divid) {
+//debugger;
+
+	ImgResult = divid;
+	
+	
+	if (count % 2 == 0) {
+		var isAscending = true;
+	     //imgUrl='http://teamspace.pg.com/sites/genomics/Site Assets/Images/Ascending.jpg';
+	     imgUrl="<img alt='sort' align='center' src='http://teamspace.pg.com/sites/genomics/Site Assets/Images/Ascending.jpg' />";
+	} else {
+		var isAscending = false;
+	      //imgUrl='http://teamspace.pg.com/sites/genomics/Site Assets/Images/Descending.jpg';
+	    imgUrl="<img alt='sort' align='center' src='http://teamspace.pg.com/sites/genomics/Site Assets/Images/Descending.jpg' />";
+
+	}
+
+	//debugger;
+	switch (sortColumn) {
+
+	case "GSS":
+		orderBy = "<OrderBy><FieldRef Name='GSSID' Ascending='"+isAscending+"' /></OrderBy>";
+		//$("#DivImg1").append("img").prop("src", imgUrl);
+		
+		//ImgResult = $("#DivImg1").is(':visible')
+			
+		//$("#DivImg1").show();
+		$("#DivImg1").html(imgUrl);
+	
+		//$("#DivImg1").prop("src",imgUrl);
+		
+		
+		break;
+
+	case "Study Name":
+		orderBy = "<OrderBy><FieldRef Name='Study_x0020_Name' Ascending='"+isAscending+"' /></OrderBy>";
+		//$("#DivImg2").append("img").prop("src", imgUrl);
+		break;
+
+	case "Major Milestone":
+		orderBy = "<OrderBy><FieldRef Name='enableStage' Ascending='"+isAscending+"' /></OrderBy>";
+		break;
+
+	case "BU":
+		orderBy = "<OrderBy><FieldRef Name='Author' Ascending='" + isAscending + "' /></OrderBy>";
+		break;
+
+	case "Genomics":
+		orderBy = "<OrderBy><FieldRef Name='GC_x0020_Analyst' Ascending='"+isAscending+"' /></OrderBy>";
+		break;
+
+	case "Statistics":
+		orderBy = "<OrderBy><FieldRef Name='Statistics_x0020_Owner' Ascending='"+isAscending+"' /></OrderBy>";
+		break;
+
+	case "Bioinformatics":
+		orderBy = "<OrderBy><FieldRef Name='Bio_x0020_Informatics_x0020_Owne' Ascending='"+isAscending+"' /></OrderBy>";
+		break;
+	}
+	
+	PageNo =0;
+	getMyGeneomicStudies();
+	//buildHTML(0);
+	count++;
+	
 }
 
-function formDate(date) {
-	var dt = date.split("/");
-	var newDate = dt[2] + "-" + dt[0] + "-" + dt[1] + " T00:00:00Z";
-	return newDate;
-
+// Functions to move next and previous records
+function next() {
+    if (PageNo < totCount - 1) {
+        $('#btnPrev').show();
+        $('#btnNext').show();
+        PageNo = PageNo + 1;
+        buildHTML(PageNo);
+    } else {
+        $('#btnNext').hide();
+        $('#btnPrev').show();
+    }
 }
 
-function reformDate(date) {
-	var curdate = date.split(" ")[0];
-	curdate = curdate.split("-");
-	curdate = curdate[1] + "/" + curdate[2] + "/" + curdate[0];
-	return curdate
+function prev() {
+    if (PageNo > 0) {
+        $('#btnPrev').show();
+        $('#btnNext').show();
+        PageNo = PageNo - 1;
+        buildHTML(PageNo);
+    } else {
+        $('#btnPrev').hide();
+        $('#btnNext').show();
+    }
 }
